@@ -1,17 +1,17 @@
 import sys
 
-
-def main():
-	pass
-
-
-if __name__ == '__main__':
-	sys.exit(main())
-
-
-def create_index(file):
-	pass
-
+def create_index(input_file):
+	position={}
+	with open(input_file, 'rb') as file:
+		for line in file:
+			wordlist=line.split()
+			x=int(wordlist[0])
+			y=int(wordlist[1])
+			distance=int(wordlist[2])
+			for word in wordlist[3:]:
+				position[word]=[x,y]
+				x+=distance
+	return position
 
 class Layout(object):
 	def __init__(self, layout_file):
@@ -23,7 +23,7 @@ class Layout(object):
 		for word in allWords:
 			nearests_sum += self.calc_nearest_neighbour(word, allWords)
 			count += 1
-		return nearests_sum/count
+		return nearests_sum / count
 
 	def calc_nearest_neighbour(self, candidate, allWords):
 		min_dist = 1000000
@@ -39,7 +39,21 @@ class Layout(object):
 		return dist_sum
 
 	def distance_between(self, word_char, candidate_char):
-		w_int = int(word_char-'a')
-		c_int = int(candidate_char-'b')
-		d = self.position[w_int-c_int]
-		return d*d
+		w_int = int(word_char - 'a')
+		c_int = int(candidate_char - 'b')
+		d = self.position[w_int - c_int]
+		return d * d
+
+
+def main():
+	position=create_index('layout1')
+	print(position[b'a'])
+	pass
+
+
+if __name__ == '__main__':
+	sys.exit(main())
+
+
+
+
