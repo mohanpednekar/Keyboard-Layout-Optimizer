@@ -1,0 +1,29 @@
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {2}Background Study}{3}
+\contentsline {subsection}{\numberline {2.1}Dead zone based keyboards}{3}
+\contentsline {subsection}{\numberline {2.2}Traditional row layout based keyboards}{4}
+\contentsline {subsection}{\numberline {2.3}Existing Study on Gesture Optimised Keyboards}{4}
+\contentsline {subsubsection}{\numberline {2.3.1}Procedure}{4}
+\contentsline {subsubsection}{\numberline {2.3.2}Choosing the optimal layouts}{6}
+\contentsline {section}{\numberline {3}Metrics}{7}
+\contentsline {subsection}{\numberline {3.1}Gesture Clarity}{7}
+\contentsline {subsection}{\numberline {3.2}Gesture Speed}{7}
+\contentsline {subsection}{\numberline {3.3}Qwerty Similarity}{8}
+\contentsline {section}{\numberline {4}Implementation}{8}
+\contentsline {subsection}{\numberline {4.1}Metric Normalisation}{8}
+\contentsline {subsection}{\numberline {4.2}Pareto Front Initialisation}{8}
+\contentsline {subsection}{\numberline {4.3}Pareto Front Expansion}{9}
+\contentsline {subsection}{\numberline {4.4}Runtime}{9}
+\contentsline {section}{\numberline {5}Modifications}{9}
+\contentsline {subsection}{\numberline {5.1}Root level changes}{9}
+\contentsline {subsection}{\numberline {5.2}Metric changes}{10}
+\contentsline {subsubsection}{\numberline {5.2.1}Gesture Clarity}{10}
+\contentsline {subsubsection}{\numberline {5.2.2}Gesture Speed}{10}
+\contentsline {subsubsection}{\numberline {5.2.3}Qwerty Similarity}{10}
+\contentsline {subsection}{\numberline {5.3}Implementation changes}{10}
+\contentsline {section}{\numberline {6}Procedure}{11}
+\contentsline {subsection}{\numberline {6.1}Corpus Processing}{11}
+\contentsline {subsection}{\numberline {6.2}Interface Quantisation}{11}
+\contentsline {subsubsection}{\numberline {6.2.1}B-Splines}{11}
+\contentsline {section}{\numberline {7}Observations}{11}
+\contentsline {section}{\numberline {8}Conclusion}{12}
