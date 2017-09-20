@@ -5,39 +5,42 @@ import time
 
 from nltk import FreqDist, re
 from nltk.corpus import brown
+from scipy.interpolate import BSpline
 
-NWords = 500
-
-def create_index(input_file):
-	position = {}
-	with open(input_file, 'rb') as file:
-		for line in file:
-			wordlist = line.split()
-			x = int(wordlist[0])
-			y = int(wordlist[1])
-			distance = int(wordlist[2])
-			for word in wordlist[3:]:
-				position[word.decode("ascii")] = [x, y]
-				x += distance
-	return position
+NWords = 5000
+MinDistLimit = 200
+UnitDistance = 4 * math.sqrt(2) + 2
 
 
 class Layout(object):
 	def __init__(self, layout_file):
-		self.position = create_index(layout_file)
+		self.position = {}
+		with open(layout_file, 'rb') as file:
+			for line in file:
+				wordList = line.split()
+				x = int(wordList[0])
+				y = int(wordList[1])
+				distance = int(wordList[2])
+				for word in wordList[3:]:
+					self.position[word.decode("ascii")] = [x, y]
+					x += distance
 
 	def calc_clarity(self, allWords):
 		nearests_sum = 0
 		count = 0
 		for word in allWords:
-			print(word)
-			nearests_sum += self.calc_nearest_neighbour(word, allWords)
+			min_dist = self.calc_nearest_neighbour(word, allWords)
+			if min_dist is MinDistLimit:
+				print(word)
+			nearests_sum += min_dist
 			count += 1
 		return nearests_sum / count
 
 	def calc_nearest_neighbour(self, candidate, allWords):
-		min_dist = 1000000
+		min_dist = MinDistLimit
 		for word in allWords:
+			if len(word) is not len(candidate):
+				continue
 			if word is candidate:
 				continue
 			dist = self.calc_ideal_distance(word, candidate)
@@ -45,9 +48,14 @@ class Layout(object):
 		return min_dist
 
 	def calc_ideal_distance(self, word, candidate):
-		dist_sum = 0
-		length = min(len(word), len(candidate))
-		for i in range(0, length):
+		dist_sum = self.distance_between(word[0], candidate[0])
+		if dist_sum > UnitDistance:
+			return MinDistLimit
+		last = self.distance_between(word[-1], candidate[-1])
+		if last > UnitDistance:
+			return MinDistLimit
+		dist_sum += last
+		for i in range(1, len(word) - 1):
 			dist_sum += self.distance_between(word[i], candidate[i])
 		return dist_sum
 
@@ -73,14 +81,34 @@ def get_word_freq_list():
 	return words_freq_list
 
 
+def printBSpline(word):
+	pass
+
+
 def main():
-	layout1 = Layout('layout1')
 	topWords = [word for word, frequency in get_word_freq_list()]
+	with open('topWords.txt', 'w') as topWordsFile:
+		for word in topWords:
+			topWordsFile.write(word)
+			printBSpline(word)
+
 	tic = time.clock()
+	layout1 = Layout('layout1')
 	clarity = layout1.calc_clarity(topWords)
 	toc = time.clock()
+
 	print(clarity)
 	print(toc - tic)
 
+
+def test():
+	t = [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20]
+	c = [-1, 2, 0, -1, 2, 3, 4, 5, 6, 7, 8]
+	k = 3
+	spl = BSpline(t, c, k, False)
+	for i in range(7):
+		print(spl(i))
+
+
 if __name__ == '__main__':
-	sys.exit(main())
+	sys.exit(test())
