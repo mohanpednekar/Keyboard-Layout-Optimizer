@@ -3,7 +3,6 @@ import string
 import sys
 import time
 
-import matplotlib.pyplot as plt
 import numpy as np
 from nltk import FreqDist, re
 from nltk.corpus import brown
@@ -19,6 +18,7 @@ class Layout(object):
 	def __init__(self, layout_file):
 		self.position = {}
 		self.bSpline = {}
+		self.length = {}
 		self.good_words_count = 0
 		with open(layout_file, 'rb') as file:
 			for line in file:
@@ -30,12 +30,16 @@ class Layout(object):
 					self.position[word.decode("ascii")] = [x, y]
 					x += distance
 
+	def train(self, allWords):
+		for word in allWords:
+			self.bSpline[word] = self.bspline_for(word)
+			self.length[word] = 0
+			for i in range(NParts - 1):
+				self.length[word] += self.distance_between(self.bSpline[word][i], self.bSpline[word][i + 1])
+
 	def calc_clarity(self, allWords):
 		nearests_sum = 0
 		count = 0
-
-		for word in allWords:
-			self.bSpline[word] = self.bspline_for(word)
 
 		for word in allWords:
 			min_dist = self.calc_nearest_neighbour(word, allWords)
@@ -106,6 +110,15 @@ class Layout(object):
 			cv = np.append(cv, [self.position[c]], 0)
 		return bspline(cv)
 
+	def calc_speed(self, topWords):
+		total_duration_per_letter = 0
+		for word in topWords:
+			duration = 0
+			for i in range(len(word) - 1):
+				duration += 68.8 * math.pow(self.distance_between_chars(word[i], word[i + 1]), 0.469)
+			total_duration_per_letter += duration / len(word)
+		return int(total_duration_per_letter) / NWords
+
 
 def is_valid(word):
 	single_letter = len(word) <= 1
@@ -142,37 +155,20 @@ def main():
 
 	tic = time.clock()
 	layout1 = Layout('layout1')
+	layout1.train(topWords)
 	clarity = layout1.calc_clarity(topWords)
-	# speed = layout1.calc_speed(topWords)
+	speed = layout1.calc_speed(topWords)
 	toc = time.clock()
 	print('-' * 24)
 	print('Clarity \t= ' + str(int(clarity * 100) / MinDistLimit) + ' %')
 	print('Good Words \t= ' + str(layout1.good_words_count * 100 / NWords) + ' %')
+	print('Speed \t\t= ' + str(speed))
 	print('Time \t\t= ' + str(int(toc - tic)) + ' sec')
+	print('-' * 24)
 
 
 def test():
-	cv = np.empty([0, 2])
-
-	layout1 = Layout('layout1')
-	word = 'pednekar'
-
-	for c in word:
-		print(layout1.position[c])
-		cv = np.append(cv, [layout1.position[c]], 0)
-	print(cv)
-
-	plt.plot(cv[:, 0], cv[:, 1], 'o-', label='Control Points')
-
-	p = bspline(cv)
-	print(p)
-	x, y = p.T
-	plt.plot(x, y, 'k-', label='Degree 3', color='r')
-
-	plt.xlim(0, 45)
-	plt.ylim(0, 10)
-	plt.gca().set_aspect('equal', adjustable='box')
-	plt.show()
+	pass
 
 
 if __name__ == '__main__':
