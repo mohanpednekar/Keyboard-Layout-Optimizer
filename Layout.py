@@ -1,7 +1,9 @@
 import math
+import os
 import string
 import sys
 import time
+from random import choice
 
 import numpy as np
 from nltk import FreqDist, re
@@ -9,9 +11,23 @@ from nltk.corpus import brown
 from scipy.interpolate import splev
 
 NWords = 5000
-MinDistLimit = 8
+MinDistLimit = 4
 UnitDistance = 4 * math.sqrt(2) + 2
 NParts = 40
+tick = u'\u2713'
+
+
+def distance_between(p1, p2):
+	x1, y1 = p1
+	x2, y2 = p2
+
+	dx = x1 - x2
+	dy = y1 - y2
+	return math.sqrt(dx * dx + dy * dy)
+
+
+def words_with_length(i):
+	return 'len/len' + str(i)
 
 
 class Layout(object):
@@ -20,6 +36,8 @@ class Layout(object):
 		self.bSpline = {}
 		self.length = {}
 		self.good_words_count = 0
+		self.top_words = []
+
 		with open(layout_file, 'rb') as file:
 			for line in file:
 				wordList = line.split()
@@ -30,50 +48,67 @@ class Layout(object):
 					self.position[word.decode("ascii")] = [x, y]
 					x += distance
 
-	def train(self, allWords):
-		for word in allWords:
-			self.bSpline[word] = self.bspline_for(word)
+	def train(self, top_words):
+		self.top_words = top_words
+		for i in range(20):
+			filename = words_with_length(i)
+			if os.path.exists(filename):
+				os.remove(filename)
+		for word in self.top_words:
+			with open(words_with_length(len(word)), 'a') as file:
+				file.write(word + '\n')
+			self.bSpline[word] = self.bSpline_for(word)
 			self.length[word] = 0
 			for i in range(NParts - 1):
-				self.length[word] += self.distance_between(self.bSpline[word][i], self.bSpline[word][i + 1])
+				self.length[word] += distance_between(self.bSpline[word][i], self.bSpline[word][i + 1])
 
-	def calc_clarity(self, allWords):
+	def pick(self, nChars, n=100):
+		picked = []
+		with open(words_with_length(nChars)) as f:
+			alist = [line.rstrip() for line in f]
+		while len(picked) < n:
+			word = choice(alist)
+			if word not in picked:
+				picked.append(word)
+		return picked
+
+	def calc_clarity(self, picked):
 		nearests_sum = 0
 		count = 0
-
-		for word in allWords:
-			min_dist = self.calc_nearest_neighbour(word, allWords)
+		for word in picked:
+			min_dist = self.calc_nearest_neighbour(word)
 			if min_dist is MinDistLimit:
-				print(word)
+				print(tick, end='', flush=True)
 				self.good_words_count += 1
+			else:
+				print('.', end='', flush=True)
 			nearests_sum += min_dist
 			count += 1
+			if count % 25 is 0: print()
 		return nearests_sum / count
 
-	def calc_nearest_neighbour(self, candidate, allWords):
+	def calc_nearest_neighbour(self, candidate):
 		min_dist = MinDistLimit
-		for word in allWords:
-			if len(word) is not len(candidate):
-				continue
-			if word is candidate:
-				continue
+		for word in self.top_words:
 			dist = self.calc_distance(word, candidate)
+			if dist < 1: continue
 			min_dist = min(min_dist, dist)
 		return min_dist
 
 	def calc_distance(self, word, candidate):
-		dist_sum = self.distance_between_chars(word[0], candidate[0])
+		word_bspline = self.bSpline[word]
+		candidate_bspline = self.bSpline[candidate]
+
+		dist_sum = distance_between(word_bspline[0], candidate_bspline[0])
 		if dist_sum > UnitDistance:
 			return MinDistLimit
-		last = self.distance_between_chars(word[-1], candidate[-1])
+		last = distance_between(word_bspline[-1], candidate_bspline[-1])
 		if last > UnitDistance:
 			return MinDistLimit
 		dist_sum += last
 
-		word_bspline = self.bSpline[word]
-		candidate_bspline = self.bSpline[candidate]
 		for i in range(1, NParts):
-			dist_sum += self.distance_between(word_bspline[i], candidate_bspline[i])
+			dist_sum += distance_between(word_bspline[i], candidate_bspline[i])
 		return dist_sum / NParts
 
 	def calc_ideal_distance(self, word, candidate):
@@ -93,31 +128,43 @@ class Layout(object):
 		c2 = candidate_char.lower()
 		dx = self.position[c1][0] - self.position[c2][0]
 		dy = self.position[c1][1] - self.position[c2][1]
-
 		return math.sqrt(dx * dx + dy * dy)
 
-	def distance_between(self, p1, p2):
-		x1, y1 = p1
-		x2, y2 = p2
-
-		dx = x1 - x2
-		dy = y1 - y2
-		return math.sqrt(dx * dx + dy * dy)
-
-	def bspline_for(self, word):
+	def bSpline_for(self, word):
 		cv = np.empty([0, 2])
 		for c in word:
 			cv = np.append(cv, [self.position[c]], 0)
-		return bspline(cv)
+		return bSpline(cv)
 
-	def calc_speed(self, topWords):
+	def calc_speed(self, picked):
 		total_duration_per_letter = 0
-		for word in topWords:
+		for word in picked:
 			duration = 0
 			for i in range(len(word) - 1):
 				duration += 68.8 * math.pow(self.distance_between_chars(word[i], word[i + 1]), 0.469)
 			total_duration_per_letter += duration / len(word)
 		return int(total_duration_per_letter) / NWords
+
+	def run_tests(self, picked):
+		tic = time.clock()
+		self.good_words_count = 0
+		clarity = self.calc_clarity(picked)
+		speed = self.calc_speed(picked)
+		toc = time.clock()
+		self.print_results(clarity, speed, toc - tic)
+
+	def print_results(self, clarity, speed, runtime):
+		print('=' * 25)
+		print('Clarity \t= %.2f' % (clarity * 100 / MinDistLimit) + '%')
+		print('Good Words \t= %d' % self.good_words_count)
+		print('Speed \t\t= %.2f' % speed)
+		print('Time \t\t= %.2f' % runtime + ' sec')
+		print('=' * 25)
+
+	def test(self):
+		for length in range(4, 11):
+			print('\nWord length = ' + str(length) + '\n' + "_" * 25)
+			self.run_tests(self.pick(length))
 
 
 def is_valid(word):
@@ -133,7 +180,7 @@ def get_word_freq_list():
 	return words_freq_list
 
 
-def bspline(cv, n=NParts, degree=2):
+def bSpline(cv, n=NParts, degree=2):
 	cv = np.asarray(cv)
 	count = len(cv)
 
@@ -148,27 +195,17 @@ def bspline(cv, n=NParts, degree=2):
 
 
 def main():
-	topWords = [word for word, frequency in get_word_freq_list()]
-	with open('topWords.txt', 'w') as topWordsFile:
-		for word in topWords:
-			topWordsFile.write(word)
+	print('Getting top words... ', end='')
+	top_words = [word for word, frequency in get_word_freq_list()]
+	print(tick)
 
-	tic = time.clock()
-	layout1 = Layout('layout1')
-	layout1.train(topWords)
-	clarity = layout1.calc_clarity(topWords)
-	speed = layout1.calc_speed(topWords)
-	toc = time.clock()
-	print('-' * 24)
-	print('Clarity \t= ' + str(int(clarity * 100) / MinDistLimit) + ' %')
-	print('Good Words \t= ' + str(layout1.good_words_count * 100 / NWords) + ' %')
-	print('Speed \t\t= ' + str(speed))
-	print('Time \t\t= ' + str(int(toc - tic)) + ' sec')
-	print('-' * 24)
-
-
-def test():
-	pass
+	layout_files = ['layout1']
+	for layout_name in layout_files:
+		print('\nTraining ' + layout_name + '... ', end='')
+		layout = Layout(layout_name)
+		layout.train(top_words)
+		print(tick)
+		layout.test()
 
 
 if __name__ == '__main__':
