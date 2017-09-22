@@ -14,13 +14,15 @@ NWords = 5000
 MinDistLimit = 4
 UnitDistance = 4 * math.sqrt(2) + 2
 NParts = 40
+
+line = '=' * 25
 tick = u'\u2713'
+dot = u'\u00b7'
 
 
 def distance_between(p1, p2):
 	x1, y1 = p1
 	x2, y2 = p2
-
 	dx = x1 - x2
 	dy = y1 - y2
 	return math.sqrt(dx * dx + dy * dy)
@@ -28,6 +30,17 @@ def distance_between(p1, p2):
 
 def words_with_length(i):
 	return 'len/len' + str(i)
+
+
+def pick(nChars, n=100):
+	picked = []
+	with open(words_with_length(nChars)) as f:
+		alist = [line.rstrip() for line in f]
+	while len(picked) < n:
+		word = choice(alist)
+		if word not in picked:
+			picked.append(word)
+	return picked
 
 
 class Layout(object):
@@ -62,17 +75,7 @@ class Layout(object):
 			for i in range(NParts - 1):
 				self.length[word] += distance_between(self.bSpline[word][i], self.bSpline[word][i + 1])
 
-	def pick(self, nChars, n=100):
-		picked = []
-		with open(words_with_length(nChars)) as f:
-			alist = [line.rstrip() for line in f]
-		while len(picked) < n:
-			word = choice(alist)
-			if word not in picked:
-				picked.append(word)
-		return picked
-
-	def calc_clarity(self, picked):
+	def count_better_clarity(self, picked):
 		nearests_sum = 0
 		count = 0
 		for word in picked:
@@ -81,7 +84,7 @@ class Layout(object):
 				print(tick, end='', flush=True)
 				self.good_words_count += 1
 			else:
-				print('.', end='', flush=True)
+				print(dot, end='', flush=True)
 			nearests_sum += min_dist
 			count += 1
 			if count % 25 is 0: print()
@@ -136,35 +139,47 @@ class Layout(object):
 			cv = np.append(cv, [self.position[c]], 0)
 		return bSpline(cv)
 
-	def calc_speed(self, picked):
-		total_duration_per_letter = 0
+	def count_better_speed(self, picked):
+		count = 0
 		for word in picked:
+			dist = 0
+			bs = self.bSpline[word]
+			for i in range(NParts - 1):
+				dist += distance_between(bs[i], bs[i + 1])
+			duration = 68.8 * math.pow(dist, 0.469)
+			ideal_speed = 1 / duration
+
 			duration = 0
 			for i in range(len(word) - 1):
-				duration += 68.8 * math.pow(self.distance_between_chars(word[i], word[i + 1]), 0.469)
-			total_duration_per_letter += duration / len(word)
-		return int(total_duration_per_letter) / NWords
+				dist = self.distance_between_chars(word[i], word[i + 1])
+				duration += 68.8 * math.pow(dist, 0.469)
+			old_speed = 1 / duration
+
+			if ideal_speed > old_speed:
+				count += 1
+		return count
 
 	def run_tests(self, picked):
 		tic = time.clock()
 		self.good_words_count = 0
-		clarity = self.calc_clarity(picked)
-		speed = self.calc_speed(picked)
+		clarity = self.count_better_clarity(picked)
+		speed = self.count_better_speed(picked)
+
 		toc = time.clock()
 		self.print_results(clarity, speed, toc - tic)
 
 	def print_results(self, clarity, speed, runtime):
-		print('=' * 25)
-		print('Clarity \t= %.2f' % (clarity * 100 / MinDistLimit) + '%')
-		print('Good Words \t= %d' % self.good_words_count)
-		print('Speed \t\t= %.2f' % speed)
-		print('Time \t\t= %.2f' % runtime + ' sec')
-		print('=' * 25)
+		print(line)
+		print('Good Words     = %d' % self.good_words_count)
+		print('Better Clarity = %d' % clarity + '%')
+		print('Better Speed   = %d' % speed + '%')
+		print('Time Taken     = %.2f' % runtime + ' sec')
+		print(line)
 
-	def test(self):
+	def evaluate(self):
 		for length in range(4, 11):
-			print('\nWord length = ' + str(length) + '\n' + "_" * 25)
-			self.run_tests(self.pick(length))
+			print('\n' + line + '\n\t Word length = ' + str(length) + '\n' + line)
+			self.run_tests(pick(length))
 
 
 def is_valid(word):
@@ -195,17 +210,17 @@ def bSpline(cv, n=NParts, degree=2):
 
 
 def main():
-	print('Getting top words... ', end='')
+	print('\nGetting top words\t... ', end='', flush=True)
 	top_words = [word for word, frequency in get_word_freq_list()]
 	print(tick)
 
 	layout_files = ['layout1']
 	for layout_name in layout_files:
-		print('\nTraining ' + layout_name + '... ', end='')
+		print('Training ' + layout_name + '\t... ', end='', flush=True)
 		layout = Layout(layout_name)
 		layout.train(top_words)
 		print(tick)
-		layout.test()
+		layout.evaluate()
 
 
 if __name__ == '__main__':
