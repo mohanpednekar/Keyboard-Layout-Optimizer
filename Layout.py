@@ -102,15 +102,34 @@ class Layout(object):
 			for i in range(NParts - 1):
 				self.length[word] += distance_between(self.bSpline[word][i], self.bSpline[word][i + 1])
 
-	def calc_nearest_neighbour(self, candidate):
+	def calc_ideal_nearest_neighbour(self, candidate):
 		min_dist = MinDistLimit
+		nearest = candidate
 		for word in self.top_words:
-			dist = self.calc_distance(word, candidate)
+			dist = self.calc_ideal_distance(word, candidate)
 			if dist < 1: continue
 			min_dist = min(min_dist, dist)
-		return min_dist
+			if min_dist is dist:
+				nearest = word
+		return nearest
 
-	def calc_distance(self, word, candidate):
+	# def calc_old_nearest_neighbour(self, candidate):
+	# 	min_dist = MinDistLimit
+	# 	for word in self.top_words:
+	# 		dist = self.calc_old_distance(word, candidate)
+	# 		if dist < 1: continue
+	# 		min_dist = min(min_dist, dist)
+	# 	return min_dist
+	#
+	# def calc_new_nearest_neighbour(self, candidate):
+	# 	min_dist = MinDistLimit
+	# 	for word in self.top_words:
+	# 		dist = self.calc_new_distance(word, candidate)
+	# 		if dist < 1: continue
+	# 		min_dist = min(min_dist, dist)
+	# 	return min_dist
+
+	def calc_ideal_distance(self, word, candidate):
 		word_bspline = self.bSpline[word]
 		candidate_bspline = self.bSpline[candidate]
 
@@ -126,17 +145,27 @@ class Layout(object):
 			dist_sum += distance_between(word_bspline[i], candidate_bspline[i])
 		return dist_sum / NParts
 
-	def calc_ideal_distance(self, word, candidate):
-		dist_sum = self.distance_between_chars(word[0], candidate[0])
+	def calc_old_distance(self, word, candidate):
+		dist_sum = distance_between(self.position[word[0]], self.position[candidate[0]])
 		if dist_sum > UnitDistance:
 			return MinDistLimit
-		last = self.distance_between_chars(word[-1], candidate[-1])
+		last = distance_between(self.position[word[-1]], self.position[candidate[-1]])
 		if last > UnitDistance:
 			return MinDistLimit
 		dist_sum += last
-		for i in range(1, len(word) - 1):
-			dist_sum += self.distance_between_chars(word[i], candidate[i])
-		return dist_sum
+		# TODO
+		return dist_sum / NParts
+
+	def calc_new_distance(self, word, candidate):
+		dist_sum = distance_between(self.position[word[0]], self.position[candidate[0]])
+		if dist_sum > UnitDistance:
+			return MinDistLimit
+		last = distance_between(self.position[word[-1]], self.position[candidate[-1]])
+		if last > UnitDistance:
+			return MinDistLimit
+		dist_sum += last
+		# TODO
+		return dist_sum / NParts
 
 	def distance_between_chars(self, word_char, candidate_char):
 		c1 = word_char.lower()
@@ -163,19 +192,22 @@ class Layout(object):
 		return bSpline(cv)
 
 	def count_better_clarity(self, picked):
-		nearests_sum = 0
 		word_count = 0
+		count = 0
 		for word in picked:
-			min_dist = self.calc_nearest_neighbour(word)
-			if min_dist is MinDistLimit:
+			neighbour = self.calc_ideal_nearest_neighbour(word)
+			ideal_distance = self.calc_ideal_distance(word, neighbour)
+			new_distance = self.calc_new_distance(word, neighbour)
+			old_distance = self.calc_old_distance(word, neighbour)
+
+			if math.fabs(ideal_distance - old_distance) > math.fabs(ideal_distance - new_distance):
 				inline_print(tick)
-				self.good_words_count += 1
+				count += 1
 			else:
 				inline_print(dot)
-			nearests_sum += min_dist
 			word_count += 1
 			if word_count % 25 is 0: print()
-		return nearests_sum / word_count
+		return count
 
 	def count_better_speed(self, picked):
 		count = 0
