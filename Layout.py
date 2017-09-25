@@ -14,6 +14,7 @@ NWords = 5000
 MinDistLimit = 4
 UnitDistance = 4 * math.sqrt(2) + 2
 NParts = 40
+DuplicateLetterDist = 4
 
 line = '=' * 25
 tick = u'\u2713'
@@ -43,15 +44,40 @@ def pick(nChars, n=100):
 	return picked
 
 
+def inline_print(text):
+	print(text, end='', flush=True)
+
+
+def correction_factor(word):
+	return pow(len(word) / NParts, 1 - 0.469)
+
+
+def speed_for(duration):
+	return 10e6 / duration
+
+
+def duration_for(dist):
+	return 68.8 * math.pow(dist, 0.469)
+
+
+def calc_bspline_duration_for(bs):
+	duration = 0
+	for i in range(NParts - 1):
+		dist = distance_between(bs[i], bs[i + 1])
+		duration += duration_for(dist)
+	return duration
+
+
 class Layout(object):
 	def __init__(self, layout_file):
 		self.position = {}
 		self.bSpline = {}
+		self.bSpline_double_precision = {}
 		self.length = {}
 		self.good_words_count = 0
 		self.top_words = []
 
-		with open(layout_file, 'rb') as file:
+		with open('layouts/' + layout_file, 'rb') as file:
 			for line in file:
 				wordList = line.split()
 				x = int(wordList[0])
@@ -71,24 +97,10 @@ class Layout(object):
 			with open(words_with_length(len(word)), 'a') as file:
 				file.write(word + '\n')
 			self.bSpline[word] = self.bSpline_for(word)
+			self.bSpline_double_precision[word] = self.bSpline_double_precision_for(word)
 			self.length[word] = 0
 			for i in range(NParts - 1):
 				self.length[word] += distance_between(self.bSpline[word][i], self.bSpline[word][i + 1])
-
-	def count_better_clarity(self, picked):
-		nearests_sum = 0
-		count = 0
-		for word in picked:
-			min_dist = self.calc_nearest_neighbour(word)
-			if min_dist is MinDistLimit:
-				print(tick, end='', flush=True)
-				self.good_words_count += 1
-			else:
-				print(dot, end='', flush=True)
-			nearests_sum += min_dist
-			count += 1
-			if count % 25 is 0: print()
-		return nearests_sum / count
 
 	def calc_nearest_neighbour(self, candidate):
 		min_dist = MinDistLimit
@@ -139,30 +151,93 @@ class Layout(object):
 			cv = np.append(cv, [self.position[c]], 0)
 		return bSpline(cv)
 
+	def bSpline_double_precision_for(self, word):
+		pos = {}
+		for i in range(len(word)):
+			pos[2 * i] = self.position[word[i]]
+		for i in range(len(word) - 1):
+			pos[2 * i + 1] = [0.5 * (pos[2 * i][0] + pos[2 * i + 2][0]), 0.5 * (pos[2 * i][1] + pos[2 * i + 2][1])]
+		cv = np.empty([0, 2])
+		for i in range(len(word) - 1):
+			cv = np.append(cv, [pos[i]], 0)
+		return bSpline(cv)
+
+	def count_better_clarity(self, picked):
+		nearests_sum = 0
+		word_count = 0
+		for word in picked:
+			min_dist = self.calc_nearest_neighbour(word)
+			if min_dist is MinDistLimit:
+				inline_print(tick)
+				self.good_words_count += 1
+			else:
+				inline_print(dot)
+			nearests_sum += min_dist
+			word_count += 1
+			if word_count % 25 is 0: print()
+		return nearests_sum / word_count
+
 	def count_better_speed(self, picked):
 		count = 0
+		word_count = 0
 		for word in picked:
-			dist = 0
-			bs = self.bSpline[word]
-			for i in range(NParts - 1):
-				dist += distance_between(bs[i], bs[i + 1])
-			duration = 68.8 * math.pow(dist, 0.469)
-			ideal_speed = 1 / duration
 
-			duration = 0
-			for i in range(len(word) - 1):
-				dist = self.distance_between_chars(word[i], word[i + 1])
-				duration += 68.8 * math.pow(dist, 0.469)
-			old_speed = 1 / duration
+			bs = self.bSpline_double_precision[word]
+			duration = calc_bspline_duration_for(bs) * correction_factor(word)
+			ideal_speed = speed_for(duration)
 
-			if ideal_speed > old_speed:
+			new_speed = self.check_ngram(word)
+
+			old_speed = self.calc_word_speed_for(word)
+
+			if math.fabs(ideal_speed - old_speed) > math.fabs(ideal_speed - new_speed):
+				inline_print(tick)
 				count += 1
+			else:
+				inline_print(dot)
+			word_count += 1
+			if word_count % 25 is 0: print()
 		return count
+
+	def calc_word_speed_for(self, word):
+		duration = 0
+		for i in range(len(word) - 1):
+			d = self.distance_between_chars(word[i], word[i + 1])
+			dist = max(d, DuplicateLetterDist)
+			duration += duration_for(dist)
+		return speed_for(duration)
+
+	def check_ngram(self, word):
+		max_speed = self.calc_word_speed_for(word)
+		for n in range(3, 5):
+			with open('ngrams/' + str(n) + 'grams') as ngrams:
+				for ngram in ngrams:
+					splitted = re.split("(" + ngram.strip() + ")", word)
+					splitted = list(filter(lambda a: a != '', splitted))
+					duration = 0
+					if len(splitted) > 1:
+						for s in splitted:
+							if len(s) > 2:
+								bs = self.bSpline_double_precision_for(s)
+								duration += calc_bspline_duration_for(bs)
+							else:
+								if len(s) is 2:
+									duration += duration_for(self.distance_between_chars(s[0], s[1]))
+						for i in range(len(splitted) - 1):
+							c1 = splitted[i][-1]
+							c2 = splitted[i + 1][0]
+							duration += duration_for(self.distance_between_chars(c1, c2))
+					if duration is 0: continue
+					duration *= correction_factor(word)
+					speed = speed_for(duration)
+					max_speed = max(max_speed, speed)
+		return max_speed
 
 	def run_tests(self, picked):
 		tic = time.clock()
 		self.good_words_count = 0
 		clarity = self.count_better_clarity(picked)
+		print(line)
 		speed = self.count_better_speed(picked)
 
 		toc = time.clock()
@@ -170,10 +245,10 @@ class Layout(object):
 
 	def print_results(self, clarity, speed, runtime):
 		print(line)
-		print('Good Words     = %d' % self.good_words_count)
-		print('Better Clarity = %d' % clarity + '%')
-		print('Better Speed   = %d' % speed + '%')
-		print('Time Taken     = %.2f' % runtime + ' sec')
+		print('Good Words \t= %d' % self.good_words_count)
+		print('Clarity    \t= %d' % clarity + '%')
+		print('Speed      \t= %d' % speed + '%')
+		print('Time Taken \t= %.2f' % runtime + ' sec')
 		print(line)
 
 	def evaluate(self):
@@ -189,10 +264,13 @@ def is_valid(word):
 	return not (single_letter or number or punctuations)
 
 
-def get_word_freq_list():
+def get_top_words():
 	words = [word for word in brown.words() if is_valid(word)]
 	words_freq_list = FreqDist(i.lower() for i in words).most_common(NWords)
-	return words_freq_list
+	top_words = [word for word, frequency in words_freq_list]
+	with open('misc/' + 'topWords', 'w+') as file:
+		for word in top_words: file.write(word + '\n')
+	return top_words
 
 
 def bSpline(cv, n=NParts, degree=2):
@@ -210,13 +288,13 @@ def bSpline(cv, n=NParts, degree=2):
 
 
 def main():
-	print('\nGetting top words\t... ', end='', flush=True)
-	top_words = [word for word, frequency in get_word_freq_list()]
+	inline_print('\nGetting top words\t... ')
+	top_words = get_top_words()
 	print(tick)
 
 	layout_files = ['layout1']
 	for layout_name in layout_files:
-		print('Training ' + layout_name + '\t... ', end='', flush=True)
+		inline_print('Training ' + layout_name + '\t... ')
 		layout = Layout(layout_name)
 		layout.train(top_words)
 		print(tick)

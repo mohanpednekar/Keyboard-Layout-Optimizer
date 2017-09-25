@@ -10,9 +10,9 @@ NGCount = 100
 
 
 def get_probability(freq, ng, i):
-	c = chr(i+96)
-	candidate_freq = Ngram.all_n_grams.count(ng+c)
-	prob = candidate_freq/freq
+	c = chr(i + 96)
+	candidate_freq = Ngram.all_n_grams.count(ng + c)
+	prob = candidate_freq / freq
 	return prob
 
 
@@ -25,10 +25,10 @@ class Ngram(object):
 		self.freq = Ngram.all_n_grams.count(ng)
 		prob_sum = 0
 		for i in range(1, 27):
-			prob = get_probability(self.freq+1, self.ng, i)
+			prob = get_probability(self.freq + 1, self.ng, i)
 			prob_sum += prob
 			self.candidates.append(prob)
-		self.candidates.insert(0, 1-prob_sum)
+		self.candidates.insert(0, 1 - prob_sum)
 
 	def __str__(self):
 		return self.ng
@@ -41,10 +41,10 @@ def get_n_grams(words_freq_list, n):
 	ng = [n_grams_for(word, n) for word, freq in words_freq_list]
 	ng = list(itertools.chain.from_iterable(ng))
 	Ngram.all_n_grams = ng
-	print("\nTotal = "+ng.__len__().__str__())
+	print("\nTotal = " + ng.__len__().__str__())
 	ng = FreqDist(ng)
-	print("Unique = "+ng.__len__().__str__())
-	print_word_freq(ng, NGCount)
+	print("Unique = " + ng.__len__().__str__())
+	print_word_freq(ng, NGCount, n)
 	return ng
 
 
@@ -59,7 +59,7 @@ def get_co_ordinates(word):
 
 def is_valid(word):
 	single_letter = len(word) <= 1
-	punctuations = re.search('['+string.punctuation+']+', word)
+	punctuations = re.search('[' + string.punctuation + ']+', word)
 	number = word.isnumeric()
 	return not (single_letter or number or punctuations)
 
@@ -70,14 +70,16 @@ def get_word_freq_list():
 	return words_freq_list
 
 
-def print_word_freq(freq_list, n):
-	for word, frequency in freq_list.most_common(n):
-		print(u'{} {}'.format(word, frequency))
+def print_word_freq(freq_list, count, n):
+	with open('ngrams/' + str(n) + 'grams', 'w+') as file:
+		for word, frequency in freq_list.most_common(count):
+			print(u'{} {}'.format(word, frequency))
+			file.write(word + '\n')
 
 
 def n_grams_for(word, n):
 	n -= 1
-	return [word[i-n:i+1] for i, char in enumerate(word)][n:]
+	return [word[i - n:i + 1] for i, char in enumerate(word)][n:]
 
 
 def test():
