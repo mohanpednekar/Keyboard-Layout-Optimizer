@@ -425,7 +425,7 @@ def print_final_results(results):
 			file.write(str(value))
 			file.write('\n')
 		file.write('\n')
-	print("Summary in results.txt\n")
+	print("Summary is in results.txt\n")
 
 
 def main():

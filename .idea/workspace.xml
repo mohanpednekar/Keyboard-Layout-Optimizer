@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cea27ff3-bfc6-4f70-ae1e-ae629121e6f4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/results.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/len/len15" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/len/len16" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/layout1" afterPath="$PROJECT_DIR$/layouts/qwerty" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/layout2" afterPath="$PROJECT_DIR$/layouts/iqwerty" />
+    <list default="true" id="cea27ff3-bfc6-4f70-ae1e-ae629121e6f4" name="Default" comment="Dummy thesis added">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/iitm-eps-converted-to.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/iitm.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.synctex.gz" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/ChangeLog" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/README" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/atbeginend.sty" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/iitm.bst" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/iitm.eps" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/iitmdiss.cls" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/missfont.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/refs.bib" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/synopsis.tex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/t1enc.sty" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.aux" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.lof" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.lot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.out" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.tex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thesis/thesis.toc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Layout.py" afterPath="$PROJECT_DIR$/Layout.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len10" afterPath="$PROJECT_DIR$/len/len10" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len11" afterPath="$PROJECT_DIR$/len/len11" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len12" afterPath="$PROJECT_DIR$/len/len12" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len13" afterPath="$PROJECT_DIR$/len/len13" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len14" afterPath="$PROJECT_DIR$/len/len14" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len2" afterPath="$PROJECT_DIR$/len/len2" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len3" afterPath="$PROJECT_DIR$/len/len3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len4" afterPath="$PROJECT_DIR$/len/len4" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len5" afterPath="$PROJECT_DIR$/len/len5" />
@@ -23,6 +37,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len8" afterPath="$PROJECT_DIR$/len/len8" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len9" afterPath="$PROJECT_DIR$/len/len9" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/misc/topWords" afterPath="$PROJECT_DIR$/misc/topWords" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results.txt" afterPath="$PROJECT_DIR$/results.txt" />
     </list>
     <ignored path="Keyboard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +51,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Keyboard$Main.coverage" NAME="Main Coverage Results" MODIFIED="1506331614121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Keyboard$Layout.coverage" NAME="Layout Coverage Results" MODIFIED="1506439248553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Keyboard$Layout.coverage" NAME="Layout Coverage Results" MODIFIED="1506439468635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -56,11 +71,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Layout.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Layout.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Layout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="427" column="11" lean-forward="true" selection-start-line="427" selection-start-column="11" selection-end-line="427" selection-end-column="11" />
+            <state relative-caret-position="6832">
+              <caret line="427" column="22" lean-forward="false" selection-start-line="427" selection-start-column="22" selection-end-line="427" selection-end-column="22" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -68,12 +83,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="results.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results.txt">
+      <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="320">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -193,8 +210,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Layout.py" />
+              <option name="myItemId" value="Main.py" />
               <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Keyboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Keyboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Main.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ngram" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Keyboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Keyboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thesis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -631,7 +680,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506433272332</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Results log stored in a file">
+      <created>1506439317631</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1506439317631</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -651,7 +707,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286638" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54202586" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25139043" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13859275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13859275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40934372" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11353944" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -718,7 +774,8 @@
     <MESSAGE value="Speed calculation completed. Mock tests for clarity." />
     <MESSAGE value="Ideal Nearest neighbor calculated." />
     <MESSAGE value="Completed both clarity and speed tests. Added tests for iQwerty." />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed both clarity and speed tests. Added tests for iQwerty." />
+    <MESSAGE value="Results log stored in a file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Results log stored in a file" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1063,14 +1120,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="73" column="25" lean-forward="false" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/topWords.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1103,20 +1152,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Layout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6832">
+          <caret line="427" column="22" lean-forward="false" selection-start-line="427" selection-start-column="22" selection-end-line="427" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/results.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="80">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Layout.py">
+    <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="427" column="11" lean-forward="true" selection-start-line="427" selection-start-column="11" selection-end-line="427" selection-end-column="11" />
+        <state relative-caret-position="320">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
