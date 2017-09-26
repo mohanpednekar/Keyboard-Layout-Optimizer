@@ -3,6 +3,7 @@ import os
 import string
 import sys
 import time
+from datetime import datetime
 from random import choice
 
 import numpy as np
@@ -20,6 +21,9 @@ line_length = 25
 line = '=' * line_length
 tick = u'\u2713'
 dot = u'\u00b7'
+
+summary = {}
+begin = time.clock()
 
 
 def distance_between(p1, p2):
@@ -113,6 +117,7 @@ class Layout(object):
 		self.top_words = []
 
 		with open('layouts/' + layout_file, 'rb') as file:
+			self.layout_name = layout_file
 			for line in file:
 				wordList = line.split()
 				x = int(wordList[0])
@@ -128,6 +133,7 @@ class Layout(object):
 			filename = words_with_length(i)
 			if os.path.exists(filename):
 				os.remove(filename)
+		count = 0
 		for word in self.top_words:
 			with open(words_with_length(len(word)), 'a') as file:
 				file.write(word + '\n')
@@ -136,6 +142,8 @@ class Layout(object):
 			self.straight_length[word] = self.straight_length_for(word)
 			self.straight_lines_division[word] = self.straight_lines_division_for(word)
 			self.ngrams_division[word] = self.nGrams_division_for(word)
+			count += 1
+			inline_print(dot if count % int(NWords * 0.26) is 0 else '')
 
 	def bSpline_length_for(self, word):
 		if word not in self.bSpline: self.bSpline[word] = self.bSpline_for(word)
@@ -282,11 +290,14 @@ class Layout(object):
 		speed = self.count_better_speed(picked)
 		toc = time.clock()
 		print_results(clarity, speed, toc - tic)
+		return [clarity, speed]
 
 	def evaluate(self):
+		results = {}
 		for length in range(4, 11):
 			print('\n' + line + '\n\t Word length = ' + str(length) + '\n' + line)
-			self.run_tests(pick(length))
+			results[length] = self.run_tests(pick(length))
+		summary[self.layout_name] = results
 
 	def straight_length_for(self, word):
 		return sum(self.distance_between_chars(word[i], word[i + 1]) for i in range(len(word) - 1))
@@ -378,8 +389,11 @@ def is_valid(word):
 
 
 def get_top_words():
+	inline_print(dot)
 	words = [word for word in brown.words() if is_valid(word)]
+	inline_print(dot)
 	words_freq_list = FreqDist(i.lower() for i in words).most_common(NWords)
+	inline_print(dot)
 	top_words = [word for word, frequency in words_freq_list]
 	with open('misc/' + 'topWords', 'w+') as file:
 		for word in top_words: file.write(word + '\n')
@@ -400,19 +414,36 @@ def bSpline(cv, n=NParts, degree=2):
 	return points
 
 
-def main():
-	inline_print('\nGetting top words\t... ')
-	top_words = get_top_words()
-	print(tick)
+def print_final_results(results):
+	end = time.clock()
+	with open('results.txt', 'a+') as file:
+		file.write('{:%Y-%m-%d %H:%M:%S}\t'.format(datetime.now()))
+		file.write(str(int(end - begin)) + ' seconds\n')
+		for key, value in results.items():
+			file.write(str(key))
+			file.write('\n')
+			file.write(str(value))
+			file.write('\n')
+		file.write('\n')
+	print("Summary in results.txt\n")
 
-	layout_files = ['layout1', 'layout2']
+
+def main():
+	inline_print('\nGetting top words\t')
+	top_words = get_top_words()
+	print(' ' + tick)
+
+	layout_files = os.listdir('layouts')
+	layout_files.sort()
 	for layout_name in layout_files:
-		inline_print('Training ' + layout_name + '\t... ')
+		inline_print('Training ' + layout_name + '\t')
 		layout = Layout(layout_name)
 		layout.train(top_words)
-		print(tick)
+		print(' ' + tick)
 		layout.evaluate()
 		print()
+
+	print_final_results(summary)
 
 
 def test():
