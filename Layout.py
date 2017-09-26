@@ -11,12 +11,13 @@ from nltk.corpus import brown
 from scipy.interpolate import splev
 
 NWords = 5000
-MinDistLimit = 4
-UnitDistance = 4 * math.sqrt(2) + 2
+MinDistLimit = 8
+UnitDistance = 4 * math.sqrt(2)
 NParts = 40
 DuplicateLetterDist = 4
 
-line = '=' * 25
+line_length = 25
+line = '=' * line_length
 tick = u'\u2713'
 dot = u'\u00b7'
 
@@ -36,7 +37,7 @@ def words_with_length(i):
 def pick(nChars, n=100):
 	picked = []
 	with open(words_with_length(nChars)) as f:
-		alist = [line.rstrip() for line in f]
+		alist = [x.rstrip() for x in f]
 	while len(picked) < n:
 		word = choice(alist)
 		if word not in picked:
@@ -46,6 +47,7 @@ def pick(nChars, n=100):
 
 def inline_print(text):
 	print(text, end='', flush=True)
+	return text
 
 
 def correction_factor(word):
@@ -61,20 +63,53 @@ def duration_for(dist):
 
 
 def calc_bspline_duration_for(bs):
-	duration = 0
-	for i in range(NParts - 1):
-		dist = distance_between(bs[i], bs[i + 1])
-		duration += duration_for(dist)
-	return duration
+	return sum(duration_for(distance_between(bs[i], bs[i + 1])) for i in range(NParts - 1))
+
+
+def increment_if_better(new, old):
+	return inline_print(tick if new < old else dot) is tick
+
+
+def find_point_at(k1, p1, p2, d):
+	x1, y1 = p1
+	x2, y2 = p2
+	k2 = d - k1
+	xp = (k1 * x2 + k2 * x1) / d
+	yp = (k1 * y2 + k2 * y1) / d
+	p = xp, yp
+	return p
+
+
+def print_results(clarity, speed, runtime):
+	print(line)
+	print('Clarity    \t= %d' % clarity + '%')
+	print('Speed      \t= %d' % speed + '%')
+	print('Time Taken \t= %.2f' % runtime + ' sec')
+	print(line)
+
+
+def find_next_anchor(i, k, pos):
+	i += 1
+	if i is len(pos) - 1: return i
+	d = distance_between(pos[i], pos[i + 1])
+	while k > d:
+		k -= d
+		i += 1
+		if i is len(pos) - 1: return i - 1
+		d = distance_between(pos[i], pos[i + 1])
+	if d > 0:
+		pos[i] = find_point_at(k, pos[i], pos[i + 1], d)
+	return i
 
 
 class Layout(object):
 	def __init__(self, layout_file):
+		self.ngrams_division = {}
+		self.straight_lines_division = {}
 		self.position = {}
 		self.bSpline = {}
-		self.bSpline_double_precision = {}
-		self.length = {}
-		self.good_words_count = 0
+		self.bSpline_length = {}
+		self.straight_length = {}
 		self.top_words = []
 
 		with open('layouts/' + layout_file, 'rb') as file:
@@ -97,12 +132,16 @@ class Layout(object):
 			with open(words_with_length(len(word)), 'a') as file:
 				file.write(word + '\n')
 			self.bSpline[word] = self.bSpline_for(word)
-			self.bSpline_double_precision[word] = self.bSpline_double_precision_for(word)
-			self.length[word] = 0
-			for i in range(NParts - 1):
-				self.length[word] += distance_between(self.bSpline[word][i], self.bSpline[word][i + 1])
+			self.bSpline_length[word] = self.bSpline_length_for(word)
+			self.straight_length[word] = self.straight_length_for(word)
+			self.straight_lines_division[word] = self.straight_lines_division_for(word)
+			self.ngrams_division[word] = self.nGrams_division_for(word)
 
-	def calc_ideal_nearest_neighbour(self, candidate):
+	def bSpline_length_for(self, word):
+		if word not in self.bSpline: self.bSpline[word] = self.bSpline_for(word)
+		return sum(distance_between(self.bSpline[word][i], self.bSpline[word][i + 1]) for i in range(NParts - 1))
+
+	def calc_nearest_neighbour(self, candidate):
 		min_dist = MinDistLimit
 		nearest = candidate
 		for word in self.top_words:
@@ -113,59 +152,41 @@ class Layout(object):
 				nearest = word
 		return nearest
 
-	# def calc_old_nearest_neighbour(self, candidate):
-	# 	min_dist = MinDistLimit
-	# 	for word in self.top_words:
-	# 		dist = self.calc_old_distance(word, candidate)
-	# 		if dist < 1: continue
-	# 		min_dist = min(min_dist, dist)
-	# 	return min_dist
-	#
-	# def calc_new_nearest_neighbour(self, candidate):
-	# 	min_dist = MinDistLimit
-	# 	for word in self.top_words:
-	# 		dist = self.calc_new_distance(word, candidate)
-	# 		if dist < 1: continue
-	# 		min_dist = min(min_dist, dist)
-	# 	return min_dist
-
 	def calc_ideal_distance(self, word, candidate):
-		word_bspline = self.bSpline[word]
-		candidate_bspline = self.bSpline[candidate]
+		dist_sum = self.check_first_and_last(candidate, word)
+		if dist_sum is MinDistLimit: return MinDistLimit
 
-		dist_sum = distance_between(word_bspline[0], candidate_bspline[0])
-		if dist_sum > UnitDistance:
-			return MinDistLimit
-		last = distance_between(word_bspline[-1], candidate_bspline[-1])
-		if last > UnitDistance:
-			return MinDistLimit
-		dist_sum += last
+		wbs = self.bSpline[word]
+		cbs = self.bSpline[candidate]
 
-		for i in range(1, NParts):
-			dist_sum += distance_between(word_bspline[i], candidate_bspline[i])
+		dist_sum += sum(distance_between(wbs[i], cbs[i]) for i in range(1, NParts))
 		return dist_sum / NParts
 
 	def calc_old_distance(self, word, candidate):
-		dist_sum = distance_between(self.position[word[0]], self.position[candidate[0]])
-		if dist_sum > UnitDistance:
-			return MinDistLimit
-		last = distance_between(self.position[word[-1]], self.position[candidate[-1]])
-		if last > UnitDistance:
-			return MinDistLimit
-		dist_sum += last
-		# TODO
+		dist_sum = self.check_first_and_last(candidate, word)
+		if dist_sum is MinDistLimit: return MinDistLimit
+
+		wsl = self.straight_lines_division[word]
+		cbs = self.bSpline[candidate]
+
+		dist_sum += sum(distance_between(wsl[i], cbs[i]) for i in range(1, NParts))
 		return dist_sum / NParts
 
 	def calc_new_distance(self, word, candidate):
-		dist_sum = distance_between(self.position[word[0]], self.position[candidate[0]])
-		if dist_sum > UnitDistance:
-			return MinDistLimit
-		last = distance_between(self.position[word[-1]], self.position[candidate[-1]])
-		if last > UnitDistance:
-			return MinDistLimit
-		dist_sum += last
-		# TODO
+		dist_sum = self.check_first_and_last(candidate, word)
+		if dist_sum is MinDistLimit: return MinDistLimit
+
+		wng = self.ngrams_division[word]
+		cbs = self.bSpline[candidate]
+		dist_sum += sum(distance_between(wng[i], cbs[i]) for i in range(1, NParts))
+
 		return dist_sum / NParts
+
+	def check_first_and_last(self, candidate, word):
+		first = distance_between(self.position[word[0]], self.position[candidate[0]])
+		last = distance_between(self.position[word[-1]], self.position[candidate[-1]])
+		dist_sum = MinDistLimit if first > UnitDistance or last > UnitDistance else first + last
+		return dist_sum
 
 	def distance_between_chars(self, word_char, candidate_char):
 		c1 = word_char.lower()
@@ -175,12 +196,6 @@ class Layout(object):
 		return math.sqrt(dx * dx + dy * dy)
 
 	def bSpline_for(self, word):
-		cv = np.empty([0, 2])
-		for c in word:
-			cv = np.append(cv, [self.position[c]], 0)
-		return bSpline(cv)
-
-	def bSpline_double_precision_for(self, word):
 		pos = {}
 		for i in range(len(word)):
 			pos[2 * i] = self.position[word[i]]
@@ -195,40 +210,32 @@ class Layout(object):
 		word_count = 0
 		count = 0
 		for word in picked:
-			neighbour = self.calc_ideal_nearest_neighbour(word)
-			ideal_distance = self.calc_ideal_distance(word, neighbour)
-			new_distance = self.calc_new_distance(word, neighbour)
-			old_distance = self.calc_old_distance(word, neighbour)
+			neighbour = self.calc_nearest_neighbour(word)
 
-			if math.fabs(ideal_distance - old_distance) > math.fabs(ideal_distance - new_distance):
-				inline_print(tick)
-				count += 1
-			else:
-				inline_print(dot)
+			new_distance = self.calc_new_distance(word, neighbour) * 100
+			old_distance = self.calc_old_distance(word, neighbour) * 100
+
+			# print(str(int(new_distance)) + '\t' + str(int(old_distance)))
+			count += increment_if_better(new_distance, old_distance)
+
 			word_count += 1
-			if word_count % 25 is 0: print()
+			if word_count % line_length is 0: print()
 		return count
 
 	def count_better_speed(self, picked):
 		count = 0
 		word_count = 0
 		for word in picked:
-
-			bs = self.bSpline_double_precision[word]
+			bs = self.bSpline[word]
 			duration = calc_bspline_duration_for(bs) * correction_factor(word)
 			ideal_speed = speed_for(duration)
-
-			new_speed = self.check_ngram(word)
-
+			new_speed = self.calc_speed_using_nGrams(word)
 			old_speed = self.calc_word_speed_for(word)
 
-			if math.fabs(ideal_speed - old_speed) > math.fabs(ideal_speed - new_speed):
-				inline_print(tick)
-				count += 1
-			else:
-				inline_print(dot)
+			count += increment_if_better(math.fabs(ideal_speed - new_speed), math.fabs(ideal_speed - old_speed))
+
 			word_count += 1
-			if word_count % 25 is 0: print()
+			if word_count % line_length is 0: print()
 		return count
 
 	def calc_word_speed_for(self, word):
@@ -239,54 +246,128 @@ class Layout(object):
 			duration += duration_for(dist)
 		return speed_for(duration)
 
-	def check_ngram(self, word):
+	def calc_speed_using_nGrams(self, word):
 		max_speed = self.calc_word_speed_for(word)
 		for n in range(3, 5):
 			with open('ngrams/' + str(n) + 'grams') as ngrams:
 				for ngram in ngrams:
-					splitted = re.split("(" + ngram.strip() + ")", word)
-					splitted = list(filter(lambda a: a != '', splitted))
-					duration = 0
-					if len(splitted) > 1:
-						for s in splitted:
-							if len(s) > 2:
-								bs = self.bSpline_double_precision_for(s)
-								duration += calc_bspline_duration_for(bs)
-							else:
-								if len(s) is 2:
-									duration += duration_for(self.distance_between_chars(s[0], s[1]))
-						for i in range(len(splitted) - 1):
-							c1 = splitted[i][-1]
-							c2 = splitted[i + 1][0]
-							duration += duration_for(self.distance_between_chars(c1, c2))
-					if duration is 0: continue
-					duration *= correction_factor(word)
-					speed = speed_for(duration)
-					max_speed = max(max_speed, speed)
+					duration = self.calc_nGram_assisted_duration(ngram, word)
+					if duration is not 0:
+						duration *= correction_factor(word)
+						speed = speed_for(duration)
+						max_speed = max(max_speed, speed)
 		return max_speed
+
+	def calc_nGram_assisted_duration(self, ngram, word):
+		split_word = re.split("(" + ngram.strip() + ")", word)
+		split_word = list(filter(lambda a: a != '', split_word))
+		duration = 0
+		if len(split_word) > 1:
+			for s in split_word:
+				if len(s) > 2:
+					duration += calc_bspline_duration_for(self.bSpline_for(s))
+				else:
+					if len(s) is 2:
+						duration += duration_for(self.distance_between_chars(s[0], s[1]))
+			for i in range(len(split_word) - 1):
+				c1 = split_word[i][-1]
+				c2 = split_word[i + 1][0]
+				duration += duration_for(self.distance_between_chars(c1, c2))
+		return duration
 
 	def run_tests(self, picked):
 		tic = time.clock()
-		self.good_words_count = 0
 		clarity = self.count_better_clarity(picked)
 		print(line)
 		speed = self.count_better_speed(picked)
-
 		toc = time.clock()
-		self.print_results(clarity, speed, toc - tic)
-
-	def print_results(self, clarity, speed, runtime):
-		print(line)
-		print('Good Words \t= %d' % self.good_words_count)
-		print('Clarity    \t= %d' % clarity + '%')
-		print('Speed      \t= %d' % speed + '%')
-		print('Time Taken \t= %.2f' % runtime + ' sec')
-		print(line)
+		print_results(clarity, speed, toc - tic)
 
 	def evaluate(self):
 		for length in range(4, 11):
 			print('\n' + line + '\n\t Word length = ' + str(length) + '\n' + line)
 			self.run_tests(pick(length))
+
+	def straight_length_for(self, word):
+		return sum(self.distance_between_chars(word[i], word[i + 1]) for i in range(len(word) - 1))
+
+	def straight_lines_division_for(self, word):
+		k = self.straight_length[word] / NParts
+		pos = {}
+		for i in range(len(word)):
+			pos[i] = self.position[word[i]]
+		points = np.empty([0, 2])
+		points = np.append(points, [pos[0]], 0)
+		points = self.divide_using_points_list(k, points, pos)
+		points = np.append(points, [pos[len(word) - 1]], 0)
+		return points
+
+	def divide_using_points_list(self, k, points, pos):
+		i = 0
+		while i < len(pos) - 1:
+			d = distance_between(pos[i], pos[i + 1])
+			while d > k:
+				pos[i] = find_point_at(k, pos[i], pos[i + 1], d)
+				points = np.append(points, [pos[i]], 0)
+				d -= k
+			i = find_next_anchor(i, k - d, pos)
+			points = np.append(points, [pos[i]], 0)
+		return points
+
+	def nGrams_division_for(self, word):
+		min_length = self.straight_length[word]
+		best_ngram = word
+		for n in range(3, 5):
+			with open('ngrams/' + str(n) + 'grams') as ngrams:
+				for ngram in ngrams:
+					length = self.calc_nGram_assisted_length(ngram, word)
+					if length < min_length:
+						min_length = length
+						best_ngram = ngram
+		if best_ngram is not word:
+			return self.calc_vector_for(word, best_ngram)
+		return self.straight_lines_division[word]
+
+	def calc_vector_for(self, word, ngram):
+		split_word = re.split("(" + ngram.strip() + ")", word)
+		split_word = list(filter(lambda a: a != '', split_word))
+		part_length = self.calc_nGram_assisted_length(ngram, word) / NParts
+		points = np.empty([0, 2])
+		posarray = []
+		for s in split_word:
+			if s is ngram:
+				posarray.extend(self.bSpline_for(s))
+			else:
+				posarray.extend([self.position[ch] for ch in s])
+		pos = {}
+		for i in range(len(posarray)):
+			pos[i] = posarray[i]
+
+		points = np.append(points, [pos[0]], 0)
+		points = self.divide_using_points_list(part_length, points, pos)
+		points = np.append(points, [posarray[- 1]], 0)
+
+		return points
+
+	def calc_nGram_assisted_length(self, ngram, word):
+		split_word = re.split("(" + ngram.strip() + ")", word)
+		split_word = list(filter(lambda a: a != '', split_word))
+
+		length = 0
+		if len(split_word) > 1:
+			for s in split_word:
+				if len(s) > 2:
+					length += self.bSpline_length_for(s)
+				else:
+					if len(s) is 2:
+						length += self.distance_between_chars(s[0], s[1])
+			for i in range(len(split_word) - 1):
+				c1 = split_word[i][-1]
+				c2 = split_word[i + 1][0]
+				length += self.distance_between_chars(c1, c2)
+		else:
+			length = self.straight_length[word]
+		return length
 
 
 def is_valid(word):
@@ -324,14 +405,19 @@ def main():
 	top_words = get_top_words()
 	print(tick)
 
-	layout_files = ['layout1']
+	layout_files = ['layout1', 'layout2']
 	for layout_name in layout_files:
 		inline_print('Training ' + layout_name + '\t... ')
 		layout = Layout(layout_name)
 		layout.train(top_words)
 		print(tick)
 		layout.evaluate()
+		print()
+
+
+def test():
+	print('Uh oh.. This is test().\nChange last line to run main()')
 
 
 if __name__ == '__main__':
-	sys.exit(main())
+	sys.exit(main() if 1 else test())
