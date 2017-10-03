@@ -3,11 +3,11 @@
 \documentclass[MTech]{iitmdiss}
 %\documentclass[BTech]{iitmdiss}
 %\usepackage{times}
- \usepackage{t1enc}
+\usepackage{t1enc}
 
 \usepackage{graphicx}
 \usepackage{epstopdf}
-\usepackage[hypertex]{hyperref} % hyperlinks for references.
+\usepackage[driverfallback=dvipdfm]{hyperref} % hyperlinks for references.
 \usepackage{amsmath} % easier math formulae, align, subequations \ldots
 
 \begin{document}
@@ -16,11 +16,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page
 
-\title{\LaTeX\ CLASS FOR DISSERTATIONS SUBMITTED TO IITM}
+\title{GESTURE OPTIMISED KEYBOARD LAYOUTS}
 
 \author{Mohan Namdeo Pednekar}
 
-\date{Sept 2017}
+\date{Oct 2017}
 \department{COMPUTER SCIENCE AND ENGINEERING}
 
 %\nocite{*}
@@ -31,8 +31,7 @@
 
 \vspace*{0.5in}
 
-\noindent This is to certify that the thesis titled {\bf \LaTeX\ CLASS  
-  FOR DISSERTATIONS SUBMITTED TO IIT-M}, submitted by {\bf Mohan Namdeo Pednekar}, 
+\noindent This is to certify that the thesis titled {\bf GETURE OPTIMISED KEYBOARD LAYOUTS}, submitted by {\bf Mohan Namdeo Pednekar}, 
   to the Indian Institute of Technology, Madras, for
 the award of the degree of {\bf Master of Technology}, is a bona fide
 record of the research work done by him under our supervision.  The
@@ -45,11 +44,11 @@ diploma.
 \begin{singlespacing}
 \hspace*{-0.25in}
 \parbox{2.5in}{
-\noindent {\bf Prof.~1} \\
-\noindent Research Guide \\ 
+\noindent {\bf Prof.} \\
+\noindent Rupesh Nasre \\ 
 \noindent Professor \\
 \noindent Dept. of CSE\\
-\noindent IIT Madras, 600036 \\
+\noindent IIT Madras, 600036
 } 
 \hspace*{1.0in} 
 %\parbox{2.5in}{
@@ -62,34 +61,22 @@ diploma.
 \end{singlespacing}
 \vspace*{0.25in}
 \noindent Place: Chennai\\
-Date: 19th January 2009 
+Date: 2nd October 2017 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Acknowledgements
 \acknowledgements
 
-Thanks to all those who made \TeX\ and \LaTeX\ what it is today.
+Thanks to all my friends who participated in the brainstorming leading to this project. My juniors also took the opportunity to discuss merits and demerits of the proposed methods and suggested different ways of implementing them. Some PhD scholars taught and helped me understand various libraries. My parents and sister made me believe that I can complete the project and encouraged me to work hard. Last but not the least, thanks to my project guide, who supported me when I was distracted and lost and directed me to a clear path. Without his support, this project could not have been completed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Abstract
 
 \abstract
 
-\noindent KEYWORDS: \hspace*{0.5em} \parbox[t]{4.4in}{\LaTeX ; Thesis;
-  Style files; Format.}
 
-\vspace*{24pt}
-
-\noindent A \LaTeX\ class along with a simple template thesis are
-provided here.  These can be used to easily write a thesis suitable
-for submission at IIT-Madras.  The class provides options to format
-PhD, MS, M.Tech.\ and B.Tech.\ thesis.  It also allows one to write a
-synopsis using the same class file.  Also provided is a BIB\TeX\ style
-file that formats all bibliography entries as per the IITM format.
-
-The formatting is as (as far as the author is aware) per the current
-institute guidelines.
+\noindent Usage of standard 3 row Qwerty keyboard for touchscreens is a standard adopted from physical keyboards. Gesture based typing has emerged as a new way of typing on touchscreen. However standard Qwerty suffers from gesture ambiguity which is a problem non-relevant to touch typing. We are exploring some ways to design and test new as well as existing keyboard layouts to optimise them for touchscreen usage. The keyboards will be evaluated based on gesture speed and accuracy while minimising the ambiguity. We try to improve the process by improving the metrics used in the process so that they represnt human interaction more accurately.
 
 \pagebreak
 
@@ -100,8 +87,8 @@ institute guidelines.
 \tableofcontents
 \thispagestyle{empty}
 
-\listoftables
-\addcontentsline{toc}{chapter}{LIST OF TABLES}
+%\listoftables
+%\addcontentsline{toc}{chapter}{LIST OF TABLES}
 \listoffigures
 \addcontentsline{toc}{chapter}{LIST OF FIGURES}
 \end{singlespace}
@@ -109,33 +96,33 @@ institute guidelines.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Abbreviations
-\abbreviations
+%\abbreviations
 
-\noindent 
-\begin{tabbing}
-xxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill
-\textbf{IITM}   \> Indian Institute of Technology, Madras \\
-\textbf{RTFM} \> Read the Fine Manual \\
-\end{tabbing}
+%\noindent 
+%\begin{tabbing}
+%xxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill
+%\textbf{IITM}   \> Indian Institute of Technology, Madras \\
+%\textbf{RTFM} \> Read the Fine Manual \\
+%\end{tabbing}
 
-\pagebreak
+%\pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Notation
 
-\chapter*{\centerline{NOTATION}}
-\addcontentsline{toc}{chapter}{NOTATION}
+%\chapter*{\centerline{NOTATION}}
+%\addcontentsline{toc}{chapter}{NOTATION}
 
-\begin{singlespace}
-\begin{tabbing}
-xxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill
-\textbf{$r$}  \> Radius, $m$ \\
-\textbf{$\alpha$}  \> Angle of thesis in degrees \\
-\textbf{$\beta$}   \> Flight path in degrees \\
-\end{tabbing}
-\end{singlespace}
+%\begin{singlespace}
+%\begin{tabbing}
+%xxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill
+%\textbf{$r$}  \> Radius, $m$ \\
+%\textbf{$\alpha$}  \> Angle of thesis in degrees \\
+%\textbf{$\beta$}   \> Flight path in degrees \\
+%\end{tabbing}
+%\end{singlespace}
 
-\pagebreak
+%\pagebreak
 \clearpage
 
 % The main text will follow from this point so set the page numbering
@@ -146,209 +133,253 @@ xxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Introduction.
 
-\chapter{INTRODUCTION}
+\chapter{Introduction}
 \label{chap:intro}
 
-This document provides a simple template of how the provided
-\verb+iitmdiss.cls+ \LaTeX\ class is to be used.  Also provided are
-several useful tips to do various things that might be of use when you
-write your thesis.
 
-Before reading any further please note that you are strongly advised
-against changing any of the formatting options used in the class
-provided in this directory, unless you are absolutely sure that it
-does not violate the IITM formatting guidelines.  \emph{Please do not
-  change the margins or the spacing.}  If you do change the formatting
-you are on your own (don't blame me if you need to reprint your entire
-thesis).  In the case that you do change the formatting despite these
-warnings, the least I ask is that you do not redistribute your style
-files to your friends (or enemies).
-
-It is also a good idea to take a quick look at the formatting
-guidelines.  Your office or advisor should have a copy.  If they
-don't, pester them, they really should have the formatting guidelines
-readily available somewhere.
-
-To compile your sources run the following from the command line:
-\begin{verbatim}
-% latex thesis.tex
-% bibtex thesis
-% latex thesis.tex
-% latex thesis.tex
-\end{verbatim}
-Modify this suitably for your sources.
-
-To generate PDF's with the links from the \verb+hyperref+ package use
-the following command:
-\begin{verbatim}
-% dvipdfm -o thesis.pdf thesis.dvi
-\end{verbatim}
-
-\section{Package Options}
-
-Use this thesis as a basic template to format your thesis.  The
-\verb+iitmdiss+ class can be used by simply using something like this:
-\begin{verbatim}
-\documentclass[PhD]{iitmdiss}  
-\end{verbatim}
-
-To change the title page for different degrees just change the option
-from \verb+PhD+ to one of \verb+MS+, \verb+MTech+ or \verb+BTech+.
-The dual degree pages are not supported yet but should be quite easy
-to add.  The title page formatting really depends on how large or
-small your thesis title is.  Consequently it might require some hand
-tuning.  Edit your version of \verb+iitmdiss.cls+ suitably to do this.
-I recommend that this be done once your title is final.
-
-To write a synopsis simply use the \verb+synopsis.tex+ file as a
-simple template.  The synopsis option turns this on and can be used as
-shown below.
-\begin{verbatim}
-\documentclass[PhD,synopsis]{iitmdiss}                                
-\end{verbatim}
-
-Once again the title page may require some small amount of fine
-tuning.  This is again easily done by editing the class file.
-
-This sample file uses the \verb+hyperref+ package that makes all
-labels and references clickable in both the generated DVI and PDF
-files.  These are very useful when reading the document online and do
-not affect the output when the files are printed.
+Gesture typing is a very popular form of input in smartphones today. Keyboards like Swype, SwiftKey, SlideIT, TouchPal, and Gboard are amongst the most popular ones which have gesture typing along with touch typing (tapping). Gestures let users develop muscle memory over time to create strokes for words they use most frequently. Usage of gestures eliminates the need to tap each letter. To accommodate words which cannot be recognised by the gestures, tapping is also available to facilitate traditional letter by letter input.
 
 
-\section{Example Figures and tables}
-
-Fig.~\ref{fig:iitm} shows a simple figure for illustration along with
-a long caption.  The formatting of the caption text is automatically
-single spaced and indented.  Table~\ref{tab:sample} shows a sample
-table with the caption placed correctly.  The caption for this should
-always be placed before the table as shown in the example.
 
 
-\begin{figure}[htpb]
-  \begin{center}
-    \resizebox{50mm}{!} {\includegraphics *{iitm.eps}}
-    \resizebox{50mm}{!} {\includegraphics *{iitm.eps}}
-    \caption {Two IITM logos in a row.  This is also an
-      illustration of a very long figure caption that wraps around two
-      two lines.  Notice that the caption is single-spaced.}
-  \label{fig:iitm}
-  \end{center}
+However, gesture typing suffers from ambiguous word gestures. The error rate for gesture typing is approximately 5-10\% \cite{evaluation} higher than for touch typing.  This problem occurs because when gesture typing, the input finger must inevitably cross unintended letters before reaching the intended one. The Qwerty layout amplifies this problem further because vowels such as u, i and o are arranged together on Qwerty, many pairs of words have
+identical gestures, and many others have very similar gestures. An analysis of over a 40,000-word lexicon showed that 6.4\% of words have another word with an identical gesture on Qwerty.
+
+
+The most straightforward solution would be to rearrange the keys on the keyboard to reduce duplicate or similar gestures. However, this will require users to learn the new layout first which may take time and defeat the whole purpose of optimising the layout.
+
+
+We must also take into consideration the speed of making gesture. A lengthy gesture will require lot of time to complete the gesture. Even a gesture that is too short may force user to be precise and introduce speed reductions which appear counter-intuitive at first glance.
+
+
+We will try to balance the above trade-offs while still reducing the gesture ambiguity in order to generate prototypes for gesture optimal keyboard layouts. As an initial step, we will try to improve the metrics used by existing method to represent human gestures more accurately.
+
+\chapter{Background Study}
+\section{Dead zone based keyboards}
+Cirrin \cite{cirrin} and Quikwriting \cite{quicwriting} were originally developed with a dead zone at the centre. They did not have the problem of gesture ambiguity since the user was expected to come back to the dead zone after each letter before going for the next letter. This had a huge drawback which is that the gestures were too long to be practical and often took more time than simple touch typing.
+
+\section{Traditional row layout based keyboards}
+Qwerty was originally developed to reduce jamming in typewriters by placing letters in most common bigrams far away from each other. But this problem is non-relevant to computer keyboards. Due to the popularity of Qwerty among all the existing typists, computer keyboards were also manufactured in Qwerty layout. Inherently, they were not optimised for comfortable typing. There were many alternative layouts created such as Dvorak, Colemak, Workman, Maltron, Typematrix etc. Some of them even have one handed layouts. Some gesture based keyboards also provide some of these as options for layout on touchscreen. However, it should be noted that although they are optimised for two handed typing using 8-10 fingers, they are not proven to be suitable for single finger gesture based typing. For example, Colemak is optimized mainly to retain AZXCV in their Qwerty positions to simplify clipboard operations. Dvorak is optimised to have all vowels on the left hand. These properties are undesirable in a gesture based keyboard. They exist primarily to help users use the same layout they use on their computers.
+
+
+One of the most important problems with the usage of row layout based keyboards is that they create many gestures which have straight horizontal lines which results in many ambiguous and duplicate gestures. Hence the most effective solution would be to test the effect of slightly modified or staggered versions of existing keyboard layouts on the accuracy and speed of gesture typing and to use the results to incrementally test and revise better keyboard layouts until we achieve the target speed and accuracy.
+
+
+\section{Existing Study on Gesture Optimised Keyboards}
+Brian Smith, Xiaojun Bi, Shumin Zhai \citet{gesturerecog} have tried to tackle the problem and proposed 4 new keyboard layouts with different objectives as targets.
+
+\begin{enumerate}
+	
+	\item GK-C: Clarity
+	\item GK-S: Speed
+	\item GK-D: Accuracy and Speed
+	\item GK-T: Accuracy, Speed and Qwerty similarity
+\end{enumerate}
+
+
+\subsection{Procedure}
+Since it is not possible to know how much weight needs to be given to each objective and also impossible to know what result to expect from the experiment, a dynamically adjustable technique need to be employed. A technique called Pareto optimisation had been successfully used in the past with good results. To do this, we find pareto optimal set (pareto front) of layouts in which none of its metric scores can be improved without hurting other scores. If there is a pareto superior layout, it replaces all the other layout it dominates. At each iteration, two randomly chosen keys are swapped. This is repeated sufficient number of times to calculate a sufficiently large pareto front. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.65]{Images/gkc}
+	\caption{GK-C}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.65]{Images/gks}
+	\caption{GK-S}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.65]{Images/gkd}
+	\caption{GK-D}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.65]{Images/gkt}
+	\caption{GK-T}
 \end{figure}
 
-\begin{table}[htbp]
-  \caption{A sample table with a table caption placed
-    appropriately. This caption is also very long and is
-    single-spaced.  Also notice how the text is aligned.}
-  \begin{center}
-  \begin{tabular}[c]{|c|r|} \hline
-    $x$ & $x^2$ \\ \hline
-    1  &  1   \\
-    2  &  4  \\
-    3  &  9  \\
-    4  &  16  \\
-    5  &  25  \\
-    6  &  36  \\
-    7  &  49  \\
-    8  &  64  \\ \hline
-  \end{tabular}
-  \label{tab:sample}
-  \end{center}
-\end{table}
 
-\section{Bibliography with BIB\TeX}
+\newpage
+\subsection{Choosing the optimal layouts}
+The pareto optimal set is usually represented using a multidimensional graph. However, for the purpose of the main problem to be solved, we can take the 2D cross section of the graph which is as follows. The layouts with best metric in a parameter are given the value 1.0 for that metric and other layouts are normalised with respect to that metric.
 
-I strongly recommend that you use BIB\TeX\ to automatically generate
-your bibliography.  It makes managing your references much easier.  It
-is an excellent way to organize your references and reuse them.  You
-can use one set of entries for your references and cite them in your
-thesis, papers and reports.  If you haven't used it anytime before
-please invest some time learning how to use it.  
 
-I've included a simple example BIB\TeX\ file along in this directory
-called \verb+refs.bib+.  The \verb+iitmdiss.cls+ class package which
-is used in this thesis and for the synopsis uses the \verb+natbib+
-package to format the references along with a customized bibliography
-style provided as the \verb+iitm.bst+ file in the directory containing
-\verb+thesis.tex+.  Documentation for the \verb+natbib+ package should
-be available in your distribution of \LaTeX.  Basically, to cite the
-author along with the author name and year use \verb+\cite{key}+ where
-\verb+key+ is the citation key for your bibliography entry.  You can
-also use \verb+\citet{key}+ to get the same effect.  To make the
-citation without the author name in the main text but inside the
-parenthesis use \verb+\citep{key}+.  The following paragraph shows how
-citations can be used in text effectively.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{Images/svc}
+	\caption{2D Pareto Front}
+\end{figure}
 
-More information on BIB\TeX\ is available in the book by
-\cite{lamport:86}.  There are many
-references~\citep{lamport:86,prabhu:xx} that explain how to use
-BIB\TeX.  Read the \verb+natbib+ package documentation for more
-details on how to cite things differently.
 
-Here are other references for example.  \citet{viz:mayavi} presents a
-Python based visualization system called MayaVi in a conference paper.
-\citet{pan:pr:flat-fst} illustrates a journal article with multiple
-authors.  Python~\citep{py:python} is a programming language and is
-cited here to show how to cite something that is best identified with
-a URL.
+Once we get the normalised graph, the 45 degree point on the 2D graph is taken as double optimised layout GK-D.
+The triple optimised layout GK-T is taken as a layout that lies closest to the 45 degree line on the 3D graph of pareto front.
 
-\section{Other useful \LaTeX\ packages}
+\chapter{Metrics}
+\section{Gesture Clarity}
+We find the ideal trace for each word. This is a polyline connecting the midpoints of consecutive letters in the word. We find the nearest neighbour of each word. This is the word which will most likely conflict with the original word. We take average of the distance between each word and its nearest neighbour for all the words weighted by word frequency. This is done using proportional shape matching.
 
-The following packages might be useful when writing your thesis.
+\[Clarity=\sum_{w \in L} f_{w} d_{w}\]
+\[ d_{w}= \min_{x \in L - \{w\} } d(w,x) \] 
+\[ \sum_{w \in L } f_{w} = 1\]
+\[ d(w,x) = \frac{1}{N} \sum_{i=1}^{N} \| w_{i} - x_{i} \|_{2} \]
 
-\begin{itemize}  
-\item It is very useful to include line numbers in your document.
-  That way, it is very easy for people to suggest corrections to your
-  text.  I recommend the use of the \texttt{lineno} package for this
-  purpose.  This is not a standard package but can be obtained on the
-  internet.  The directory containing this file should contain a
-  lineno directory that includes the package along with documentation
-  for it.
+\section{Gesture Speed}
+Gestures are split into curves, line segments and corners. It was noticed that people tend to make faster strokes on longer line segments. The entry time for a stroke depends on the angle at a corner. However it was also noticed that this entry time was much smaller than the entry time for a line segment irrespective of curve. Hence it can be easily ignored. 
+The total time required for the gesture can be simplified as the sum of times required by each segment and ignoring the small entry time of corners. 
+Time required by each segment can be pre-calculated based on bigrams and the average time per bigram can be calculated for the entire layout using bigram frequency weights.
 
-\item The \texttt{listings} package should be available with your
-  distribution of \LaTeX.  This package is very useful when one needs
-  to list source code or pseudo-code.
+\[ T( \overline{AB} )= m \cdot (\| \overline{AB} \|_{2})^n   \]
+\[ T(P)= \sum_{\overline{AB} \in P} T(\overline{AB}) \]
+\[ o(i-j)= \sum_{w \in L} f_{w} \cdot (\text {\# occurunces of i-j in w}) \]
+\[ G = \sum_{i,j \in \alpha} o(i-j) \cdot T(\overline{K_{i}K_{j}}) \]
+\[ Speed = \frac{60000}{G} \]
 
-\item For special figure captions the \texttt{ccaption} package may be
-  useful.  This is specially useful if one has a figure that spans
-  more than two pages and you need to use the same figure number.
+\section{Qwerty Similarity}
+The Qwerty similarity metric can be calculated using average of squared euclidean distances of keys from the the original Qwerty positions. However this metric is observed to punish farther placement of a small number of keys far more severely than a small displacement of multiple keys. Considering that keyboard is a grid, Manhattan distance was taken as a suitable metric to allow some infrequent keys to be moved more liberally without deeming the layout to be too dissimilar. To simplify Manhattan distance calculation, keys are aligned vertically by shifting middle row slightly to the left and bottom row to the right to align both of them to the top row.
 
-\item The notation page can be entered manually or automatically
-  generated using the \texttt{nomencl} package.
+\[ Similarity = \sum_{i \in \alpha} (|k_{i_{x}}-q_{i_{x}}| + |k_{i_{y}}-q_{i_{y}}|)\]
 
-\end{itemize}
+\chapter{Implementation}
 
-More details on how to use these specific packages are available along
-with the documentation of the respective packages.
+\section{Metric Normalisation}
+Tests are performed on each individual metric independently to estimate the maximum and minimum raw score for the metric.
+10-30 optimisations are performed on each metric to achieve this.
+Each optimisation starts with a random keyboard layout and runs for 2000 iterations swapping two random keys at each iteration.
+Simulated annealing is used to keep better layouts with 100\% probability and other layouts with a fixed probability.
+The normalised scores are used for the next phase.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Appendices.
+\section{Pareto Front Initialisation}
+22 different weightings are used for various linear combinations of metrics.
+15 local neighbourhood searches are performed. Each search is 2000 iterations.
+The objective is to maximise the score of the linear combinations.
+The front is empty at first but each additional layout generated is added to the front as the pareto optimal layouts are found.
 
-\appendix
 
-\chapter{A SAMPLE APPENDIX}
+\section{Pareto Front Expansion}
+200 passes are performed over the pareto front to find pareto optimal layouts similar to those in the pareto front.
+Performing initialisation before this step helps in ensuring that all the possible solutions are reachable without swapping more than 2 keys at a time.
 
-Just put in text as you would into any chapter with sections and
-whatnot.  Thats the end of it.
+\section{Runtime}
+For 40,000 words vocabulary, it took four machines with 32 threads each, three weeks to obtain the results.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Bibliography.
+\chapter{Modifications}
+\section{Root level changes}
+The existing layouts can be re designed with different number of rows or non linear arrangement of keys such as this layout called Interlaced Qwerty or iQwerty. This is a slight modification of original iQwerty proposal. The toggled middle row and quarter width extra alignment ensure that there are at most two characters in a straight diagonal trace. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=1]{Images/iqmod}
+	\caption{Modified iQwerty}
+\end{figure}
+
+
+This layout reduces the number of linear duplicates significantly and contributes in both gesture clarity and speed. At the same time, it maintains Qwerty positions almost intact. Hence it can be used without incurring a significant learning curve.
+
+\section{Metric changes}
+\subsection{Gesture Clarity}
+Calculating ideal trace as a series of straight line segments is not a realistic representative of human finger movements. Those can be better modelled using b-splines of appropriate order.
+The proposed method is to generate a b-spline with n control points in the spline. One each at every character in the ideal trace. Each b-spline is split into 40 parts and pointwise distance from candidate trace at each split is recorded. Then we sum the distances of all 40 pairs and divide it by 40 to get the distance between the traces. We ignore all the words that start from a key farther than $\sqrt{2}$ units away from the first letter of the candidate word and also those which end at a key farther than $\sqrt{2}$ units away from the last letter. The word with the smallest distance from candidate word is the nearest neighbour. Inverse of the weighted average distance of all nearest neighbours is the the gesture clarity.
+
+\subsection{Gesture Speed}
+Usage of bigram-only model gives a representation of only line segments. We can use a combination of bigrams, trigrams and quad grams depending on the lengths of the words.
+Such ngrams if more frequent will represent the muscle memory involved in making the stroke, effectively making those strokes faster than other strokes with similar score in bigram-only metric. Assuming that 'length' is the length of the trigram or quadgram, to calculate the time required, we use the formula $ time = 68.8 * length^{0.469} $. \cite{strokes}
+
+\subsection{Qwerty Similarity}
+There is a structural change in the layout. However, the we can still use finer grid to find Manhattan distance and divide the result by the number of grid cells per character. In this case, 4 grid cells. The euclidean divisor here would be $4 \sqrt{2}$. In order to compare any proposed layout with another. We need to divide the similarity by this euclidean divisor in order to maintain parity.
+
+\section{Implementation changes}
+Trigrams and Quadgrams are used for all words longer than 3 letters.
+Quadgrams are designed to override trigrams in case of overlap.
+The limits may be adjusted to include Pentagrams, Hexagrams etc to represent gesture familiarity more accurately. However, due to low frequency of such ngrams in the corpus in hand, we decided to skip them for now.
+
+We also use Cox-de-Boor algorithm \cite{deboor} to divide the gesture into 40 eaqual parts instead of using proportional shape matching. This allows us to use b-splines as gestures instead of straight lines.
+
+The b-splines being used are of the order 2 and have additional points as midpoint of each bigram. These are added based on the observation that curve usually starts only in the second half of the gesture.
+
+\chapter{Procedure}
+\section{Corpus Processing}
+Brown corpus is used as training data. It contains about 50,000 unique words.
+Top 5000 most frequent words are used to generate n grams.
+Ngram frequencies are calculated to find the most common n grams to be used for optimisation. For the purpose of testing, top 100 are used.
+
+\section{Interface Quantisation}
+Standard keyboard layout is used and key positions are calculated.
+The centre of each key is considered as the key position.
+The number of grid cells per key is multiplied by $\sqrt{2}$ to find the euclidean divisor of the layout.
+Ideal trace is generated for all the words. 
+This information is used to calculate nearest neighbour and also the gesture time length.
+This process is repeated for structural change in the keyboard. Finer grid is used for modified iQwerty using 4 grid cells per key.
+
+\subsection{B-Splines}
+The traces are interpreted as b-Splines. To prune the dataset, the starting letter of the at the first control point is considered as unchanged and all the other traces are ignored. This is likely to be true because generally users choose the first character more precisely than rest of the characters in the stroke. Gesture entry time is expected to be directly proportional to Qwerty similarity. However, this hypothesis has not been tested since we are testing the metrics per layout basis instead of testing the layout optimality.
+
+\chapter{Observations}
+Distance between two b-splines is currently calculated using control points. Ideally we would need about 20 points to calculate distances with close to 90\% accuracy. To be able to propose new keyboard layout, we should consider 40 points in order to make more accurate predictions in approximately double the amount of time.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{Images/accuracy}
+	\caption{Accuracy v/s Sample points }
+\end{figure}
+
+However, to prove the superiority of improved metrics over the older metrics, we performed distance and speed calculations for randomly chosen 100 words at a time with their own ideal traces. 100 words each were chosen from 4 to 10 letter words. Here, ideal trace is the b-spline of the order $2*n-1$ with $n-1$ additional points as midpoints of each bigram. Older metric is straight lines connecting consecutive letters. New metric is replacing common trigrams or quadgrams with b-splines.
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{Images/result}
+	\caption{Results for Qwerty and iQwerty}
+\end{figure}
+
+
+The new metric is designed to fall back to old metric in case of non-availability of faster trace. Hence this metric guarantees that the new trace will not be worse. To measure the superiority, we calculate the percentage of times the metric gives results closer to ideal than old metric. In this case, we count the number of favourable cases from 100 samples each.
+
+
+We see that both speed and accuracy improvements are more prominent for longer words. The experiment was repeated multiple times and similar pattern was observed in general.  
+
+\chapter{Conclusion}
+The results achieved so far can be used to propose new keyboard layouts and can have further refinements in stroke sampling and processing. The results shall also be tested on users to check whether they follow the experimental assumptions about speed, accuracy and familiarity. Pareto front calculation and expansion using new metrics will give more realistic results since the measured difference between ideal and improved metrics is smaller than that with old metrics.
+
+
 
 \begin{singlespace}
-  \bibliography{refs}
+	\bibliography{refs}
 \end{singlespace}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% List of papers
-
-\listofpapers
-
-\begin{enumerate}  
-\item Authors....  \newblock
- Title...
-  \newblock {\em Journal}, Volume,
-  Page, (year).
-\end{enumerate}  
+%\begin{thebibliography}{10}
+%	\bibitem{gesturerecog} 
+%	Brian A. Smith1 Xiaojun Bi Shumin Zhai,
+%	\textit{Optimizing Touchscreen Keyboards for Gesture Typing}. 
+%	CHI 2015.
+%	
+%	\bibitem{cirrin} 
+%	Mankoff, J. and Abowd, G.D.  
+%	\textit{Cirrin: a word-level unistroke keyboard for pen input.}
+%	In Proc. UIST 1998, ACM Press (1998), 213 - 214.
+%	
+%	\bibitem{quicwriting} 
+%	Perlin, K. 
+%	\textit{Quikwriting: continuous stylus-based text entry.} 
+%	In Proc. UIST 1998, ACM Press (1998), 215 - 216.
+%	
+%	\bibitem{evaluation}
+%	Bi, X., Azenkot, S., Partridge, K., and Zhai, S. 
+%	\textit{Octopus: evaluating touchscreen keyboard correction and recognition algorithms via remulation}
+%	In Proc. CHI 2013, ACM Press (2013), 543 - 552
+%	
+%	\bibitem{strokes}
+%	Cao, X. and Zhai, S. 
+%	\textit{Modeling human performance of pen stroke gestures.}
+%	In Proc. CHI 2007, ACM Press (2007), 1495 - 1504.
+%	\bibitem{deboor}
+%	C. de Boor.
+%	\textit{Package for calculating with B-splines.}
+%	SIAM Journal on Numerical Analysis, Vol 14, (1973), 57.
+	
+%\end{thebibliography}
 
 \end{document}

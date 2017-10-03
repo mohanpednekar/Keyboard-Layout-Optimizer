@@ -1,12 +1,32 @@
 \BOOKMARK [0][-]{chapter*.1}{ACKNOWLEDGEMENTS}{}% 1
 \BOOKMARK [0][-]{chapter*.2}{ABSTRACT}{}% 2
-\BOOKMARK [0][-]{chapter*.4}{LIST OF TABLES}{}% 3
-\BOOKMARK [0][-]{chapter*.5}{LIST OF FIGURES}{}% 4
-\BOOKMARK [0][-]{chapter*.6}{ABBREVIATIONS}{}% 5
-\BOOKMARK [0][-]{chapter*.7}{NOTATION}{}% 6
-\BOOKMARK [0][-]{chapter.1}{INTRODUCTION}{}% 7
-\BOOKMARK [1][-]{section.1.1}{Package Options}{chapter.1}% 8
-\BOOKMARK [1][-]{section.1.2}{Example Figures and tables}{chapter.1}% 9
-\BOOKMARK [1][-]{section.1.3}{Bibliography with BIBTeX}{chapter.1}% 10
-\BOOKMARK [1][-]{section.1.4}{Other useful LaTeX packages}{chapter.1}% 11
-\BOOKMARK [0][-]{appendix.A}{A SAMPLE APPENDIX}{}% 12
+\BOOKMARK [0][-]{chapter*.4}{LIST OF FIGURES}{}% 3
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 4
+\BOOKMARK [0][-]{chapter.2}{Background Study}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Dead zone based keyboards}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{Traditional row layout based keyboards}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{Existing Study on Gesture Optimised Keyboards}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.3.1}{Procedure}{section.2.3}% 9
+\BOOKMARK [2][-]{subsection.2.3.2}{Choosing the optimal layouts}{section.2.3}% 10
+\BOOKMARK [0][-]{chapter.3}{Metrics}{}% 11
+\BOOKMARK [1][-]{section.3.1}{Gesture Clarity}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Gesture Speed}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Qwerty Similarity}{chapter.3}% 14
+\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 15
+\BOOKMARK [1][-]{section.4.1}{Metric Normalisation}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.2}{Pareto Front Initialisation}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.3}{Pareto Front Expansion}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.4}{Runtime}{chapter.4}% 19
+\BOOKMARK [0][-]{chapter.5}{Modifications}{}% 20
+\BOOKMARK [1][-]{section.5.1}{Root level changes}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.2}{Metric changes}{chapter.5}% 22
+\BOOKMARK [2][-]{subsection.5.2.1}{Gesture Clarity}{section.5.2}% 23
+\BOOKMARK [2][-]{subsection.5.2.2}{Gesture Speed}{section.5.2}% 24
+\BOOKMARK [2][-]{subsection.5.2.3}{Qwerty Similarity}{section.5.2}% 25
+\BOOKMARK [1][-]{section.5.3}{Implementation changes}{chapter.5}% 26
+\BOOKMARK [0][-]{chapter.6}{Procedure}{}% 27
+\BOOKMARK [1][-]{section.6.1}{Corpus Processing}{chapter.6}% 28
+\BOOKMARK [1][-]{section.6.2}{Interface Quantisation}{chapter.6}% 29
+\BOOKMARK [2][-]{subsection.6.2.1}{B-Splines}{section.6.2}% 30
+\BOOKMARK [0][-]{chapter.7}{Observations}{}% 31
+\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 32
