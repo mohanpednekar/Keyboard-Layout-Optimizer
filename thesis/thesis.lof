@@ -1,16 +1,24 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces GK-C\relax }}{4}{figure.caption.5}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces GK-S\relax }}{4}{figure.caption.6}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces GK-D\relax }}{4}{figure.caption.7}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces GK-T\relax }}{4}{figure.caption.8}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces 2D Pareto Front\relax }}{5}{figure.caption.9}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Dvorak\relax }}{5}{figure.caption.5}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Colemak\relax }}{5}{figure.caption.6}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Workman\relax }}{5}{figure.caption.7}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Maltron in Qwerty version\relax }}{6}{figure.caption.8}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces TypeMatrix in Dvorak version\relax }}{6}{figure.caption.9}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Left Handed Dvorak\relax }}{6}{figure.caption.10}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Right Handed Dvorak\relax }}{7}{figure.caption.11}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces GK-C\relax }}{8}{figure.caption.12}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces GK-S\relax }}{8}{figure.caption.13}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces GK-D\relax }}{8}{figure.caption.14}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces GK-T\relax }}{9}{figure.caption.15}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces 2D Pareto Front [\cite {gesturerecog}]\relax }}{9}{figure.caption.16}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Modified iQwerty\relax }}{10}{figure.caption.10}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Modified iQwerty\relax }}{15}{figure.caption.17}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Accuracy v/s Sample points \relax }}{14}{figure.caption.11}
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Results for Qwerty and iQwerty\relax }}{15}{figure.caption.12}
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Accuracy v/s Sample points \relax }}{20}{figure.caption.18}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Results for Qwerty and iQwerty\relax }}{21}{figure.caption.19}
+\addvspace {10\p@ }
 \addvspace {10\p@ }

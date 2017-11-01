@@ -1,8 +1,13 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{9}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{{\tt #1}}\fi
 \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{Bi~X. and S.(2014)}]{weighting}
+{\bf Bi~X., O.~T.} and {\bf Z.~S.}, Both complete and correct? multiobjective
+  optimization of a touchscreen keyboard.
+\newblock {\em In\/} {\em CHI\/}. ACM Press, 2014.
 
 \bibitem[{Bi~X. and S(2013)}]{evaluation}
 {\bf Bi~X., P.~K., Azenkot~S.} and {\bf Z.~S}, Octopus: evaluating touchscreen
@@ -19,6 +24,11 @@
 \newblock Package for calculating with b-splines.
 \newblock {\em SIAM Journal on Numerical Analysis\/}, {\bf 14}, 57.
 
+\bibitem[{Francis and Kucera(1964)}]{brown}
+{\bf Francis, W.~N.} and {\bf H.~Kucera} (1964).
+\newblock Brown corpus manual.
+\newblock \urlprefix\url{http://www.hit.uib.no/icame/brown/bcm.html}.
+
 \bibitem[{J. and G.D.(1998)}]{cirrin}
 {\bf J., M.} and {\bf A.~G.D.}, Cirrin: a word-level unistroke keyboard for pen
   input.
@@ -32,5 +42,10 @@
 {\bf X., C.} and {\bf Z.~S.}, Modeling human performance of pen stroke
   gestures.
 \newblock {\em In\/} {\em CHI\/}. ACM Press, 2007.
+
+\bibitem[{Zhai and Kristensson(2008)}]{iqwerty}
+{\bf Zhai, S.} and {\bf P.~Kristensson}, Interlaced qwerty -accommodating ease
+  of visual search and input flexibility in shape writing.
+\newblock {\em In\/} {\em CHI\/}. ACM Press, 2008.
 
 \end{thebibliography}
