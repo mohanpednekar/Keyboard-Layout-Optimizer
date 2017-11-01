@@ -1,33 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cea27ff3-bfc6-4f70-ae1e-ae629121e6f4" name="Default" comment="Readme added">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/len/len15" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/len/len16" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/result.png" afterPath="$PROJECT_DIR$/result.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thesis/Images/result.png" afterPath="$PROJECT_DIR$/thesis/Images/result.png" />
+    <list default="true" id="cea27ff3-bfc6-4f70-ae1e-ae629121e6f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thesis/thesis.pdf" afterPath="$PROJECT_DIR$/thesis/thesis.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thesis/thesis.synctex.gz" afterPath="$PROJECT_DIR$/thesis/thesis.synctex.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Keyboard.iml" afterPath="$PROJECT_DIR$/.idea/Keyboard.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Layout.py" afterPath="$PROJECT_DIR$/Layout.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/iqwerty" afterPath="$PROJECT_DIR$/layouts/iqwerty" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len10" afterPath="$PROJECT_DIR$/len/len10" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len11" afterPath="$PROJECT_DIR$/len/len11" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len12" afterPath="$PROJECT_DIR$/len/len12" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len13" afterPath="$PROJECT_DIR$/len/len13" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len14" afterPath="$PROJECT_DIR$/len/len14" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len2" afterPath="$PROJECT_DIR$/len/len2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len3" afterPath="$PROJECT_DIR$/len/len3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len4" afterPath="$PROJECT_DIR$/len/len4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len5" afterPath="$PROJECT_DIR$/len/len5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len6" afterPath="$PROJECT_DIR$/len/len6" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len7" afterPath="$PROJECT_DIR$/len/len7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len8" afterPath="$PROJECT_DIR$/len/len8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/len/len9" afterPath="$PROJECT_DIR$/len/len9" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/misc/topWords" afterPath="$PROJECT_DIR$/misc/topWords" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results.txt" afterPath="$PROJECT_DIR$/results.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thesis/refs.bib" afterPath="$PROJECT_DIR$/thesis/refs.bib" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thesis/thesis.aux" afterPath="$PROJECT_DIR$/thesis/thesis.aux" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thesis/thesis.bbl" afterPath="$PROJECT_DIR$/thesis/thesis.bbl" />
@@ -75,9 +52,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="431">
               <caret line="471" column="23" lean-forward="false" selection-start-line="471" selection-start-column="23" selection-end-line="471" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -693,7 +668,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507036349938</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Thesis updated">
+      <created>1509532104394</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1509532104394</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -786,7 +768,8 @@
     <MESSAGE value="Dummy thesis added" />
     <MESSAGE value="Thesis completed" />
     <MESSAGE value="Readme added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Readme added" />
+    <MESSAGE value="Thesis updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Thesis updated" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -807,9 +790,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -834,9 +815,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -861,9 +840,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -888,9 +865,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1112,9 +1087,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="431">
           <caret line="471" column="23" lean-forward="false" selection-start-line="471" selection-start-column="23" selection-end-line="471" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>

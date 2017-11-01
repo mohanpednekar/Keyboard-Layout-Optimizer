@@ -7,7 +7,7 @@ Warning--entry type for "brown" isn't style-file defined
 --line 74 of file refs.bib
 You've used 9 entries,
             2930 wiz_defined-function locations,
-            645 strings with 5734 characters,
+            645 strings with 5799 characters,
 and the built_in function-call counts, 4756 in all, are:
 = -- 342
 > -- 165

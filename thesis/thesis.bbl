@@ -7,17 +7,19 @@
 \bibitem[{Bi~X. and S.(2014)}]{weighting}
 {\bf Bi~X., O.~T.} and {\bf Z.~S.}, Both complete and correct? multiobjective
   optimization of a touchscreen keyboard.
-\newblock {\em In\/} {\em CHI\/}. ACM Press, 2014.
+\newblock {\em In\/} {\em Human Factors in Computing Systems\/}. ACM Press,
+  2014.
 
 \bibitem[{Bi~X. and S(2013)}]{evaluation}
 {\bf Bi~X., P.~K., Azenkot~S.} and {\bf Z.~S}, Octopus: evaluating touchscreen
   keyboard correction and recognition algorithms via remulation.
-\newblock {\em In\/} {\em CHI\/}. ACM Press, 2013.
+\newblock {\em In\/} {\em Human Factors in Computing Systems\/}. ACM Press,
+  2013.
 
 \bibitem[{Brian A.~Smith(2015)}]{gesturerecog}
 {\bf Brian A.~Smith, S.~Z., Xiaojun~Bi}, Optimizing touchscreen keyboards for
   gesture typing.
-\newblock {\em In\/} {\em CHI\/}. 2015.
+\newblock {\em In\/} {\em Human Factors in Computing Systems\/}. 2015.
 
 \bibitem[{de~Boor(1973)}]{deboor}
 {\bf de~Boor, C.} (1973).
@@ -32,20 +34,24 @@
 \bibitem[{J. and G.D.(1998)}]{cirrin}
 {\bf J., M.} and {\bf A.~G.D.}, Cirrin: a word-level unistroke keyboard for pen
   input.
-\newblock {\em In\/} {\em UIST\/}. ACM Press, 1998.
+\newblock {\em In\/} {\em User Interface Software and Technology\/}. ACM Press,
+  1998.
 
 \bibitem[{K(1998)}]{quicwriting}
 {\bf K, P.}, Quikwriting: continuous stylus-based text entry.
-\newblock {\em In\/} {\em UIST\/}. ACM Press, 1998.
+\newblock {\em In\/} {\em User Interface Software and Technology\/}. ACM Press,
+  1998.
 
 \bibitem[{X. and S.(2007)}]{strokes}
 {\bf X., C.} and {\bf Z.~S.}, Modeling human performance of pen stroke
   gestures.
-\newblock {\em In\/} {\em CHI\/}. ACM Press, 2007.
+\newblock {\em In\/} {\em Human Factors in Computing Systems\/}. ACM Press,
+  2007.
 
 \bibitem[{Zhai and Kristensson(2008)}]{iqwerty}
 {\bf Zhai, S.} and {\bf P.~Kristensson}, Interlaced qwerty -accommodating ease
   of visual search and input flexibility in shape writing.
-\newblock {\em In\/} {\em CHI\/}. ACM Press, 2008.
+\newblock {\em In\/} {\em Human Factors in Computing Systems\/}. ACM Press,
+  2008.
 
 \end{thebibliography}

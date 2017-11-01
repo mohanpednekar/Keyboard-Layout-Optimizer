@@ -6,30 +6,30 @@
 \contentsline {section}{\numberline {1.2}Outline}{2}{section.1.2}
 \contentsline {chapter}{\numberline {2}Background Study}{4}{chapter.2}
 \contentsline {section}{\numberline {2.1}Dead zone based keyboards}{4}{section.2.1}
-\contentsline {section}{\numberline {2.2}Traditional row layout based keyboards}{4}{section.2.2}
-\contentsline {section}{\numberline {2.3}Existing Study on Gesture Optimised Keyboards}{7}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Procedure}{7}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Choosing the optimal layouts}{9}{subsection.2.3.2}
-\contentsline {chapter}{\numberline {3}Layout Evaluation Metrics}{10}{chapter.3}
-\contentsline {section}{\numberline {3.1}Gesture Clarity}{10}{section.3.1}
-\contentsline {section}{\numberline {3.2}Gesture Speed}{11}{section.3.2}
-\contentsline {section}{\numberline {3.3}Qwerty Similarity}{12}{section.3.3}
-\contentsline {chapter}{\numberline {4}Existing Implementation}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Metric Normalisation}{13}{section.4.1}
-\contentsline {section}{\numberline {4.2}Pareto Front Initialisation}{14}{section.4.2}
-\contentsline {section}{\numberline {4.3}Pareto Front Expansion}{14}{section.4.3}
-\contentsline {section}{\numberline {4.4}Runtime}{14}{section.4.4}
-\contentsline {chapter}{\numberline {5}Proposed Changes in Metrics and Implementation}{15}{chapter.5}
-\contentsline {section}{\numberline {5.1}Root level changes}{15}{section.5.1}
-\contentsline {section}{\numberline {5.2}Metric changes}{16}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Gesture Clarity}{16}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Gesture Speed}{16}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}Qwerty Similarity}{17}{subsection.5.2.3}
-\contentsline {section}{\numberline {5.3}Implementation changes}{17}{section.5.3}
-\contentsline {chapter}{\numberline {6}Initialisation and Testing Procedure}{18}{chapter.6}
-\contentsline {section}{\numberline {6.1}Corpus Processing}{18}{section.6.1}
-\contentsline {section}{\numberline {6.2}Interface Quantisation}{18}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Gesture Trace Evaluation}{18}{subsection.6.2.1}
-\contentsline {chapter}{\numberline {7}Observations}{20}{chapter.7}
-\contentsline {chapter}{\numberline {8}Conclusion}{22}{chapter.8}
-\contentsline {chapter}{\numberline {9}Future Work}{23}{chapter.9}
+\contentsline {section}{\numberline {2.2}Traditional row layout based keyboards}{5}{section.2.2}
+\contentsline {section}{\numberline {2.3}Existing Study on Gesture Optimized Keyboards}{8}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Procedure}{8}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Choosing the optimal layouts}{10}{subsection.2.3.2}
+\contentsline {chapter}{\numberline {3}Layout Evaluation Metrics}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Gesture Clarity}{11}{section.3.1}
+\contentsline {section}{\numberline {3.2}Gesture Speed}{12}{section.3.2}
+\contentsline {section}{\numberline {3.3}Qwerty Similarity}{13}{section.3.3}
+\contentsline {chapter}{\numberline {4}Existing Implementation}{14}{chapter.4}
+\contentsline {section}{\numberline {4.1}Metric Normalization}{14}{section.4.1}
+\contentsline {section}{\numberline {4.2}Pareto Front Initialization}{15}{section.4.2}
+\contentsline {section}{\numberline {4.3}Pareto Front Expansion}{15}{section.4.3}
+\contentsline {section}{\numberline {4.4}Runtime}{15}{section.4.4}
+\contentsline {chapter}{\numberline {5}Proposed Changes in Metrics and Implementation}{16}{chapter.5}
+\contentsline {section}{\numberline {5.1}Root level changes}{16}{section.5.1}
+\contentsline {section}{\numberline {5.2}Metric changes}{17}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Gesture Clarity}{17}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Gesture Speed}{17}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Qwerty Similarity}{18}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}Implementation changes}{18}{section.5.3}
+\contentsline {chapter}{\numberline {6}Initialization and Testing Procedure}{19}{chapter.6}
+\contentsline {section}{\numberline {6.1}Corpus Processing}{19}{section.6.1}
+\contentsline {section}{\numberline {6.2}Interface Quantization}{19}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Gesture Trace Evaluation}{19}{subsection.6.2.1}
+\contentsline {chapter}{\numberline {7}Observations}{21}{chapter.7}
+\contentsline {chapter}{\numberline {8}Conclusion}{23}{chapter.8}
+\contentsline {chapter}{\numberline {9}Future Work}{24}{chapter.9}

@@ -7,7 +7,7 @@
 \BOOKMARK [0][-]{chapter.2}{Background Study}{}% 7
 \BOOKMARK [1][-]{section.2.1}{Dead zone based keyboards}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.2}{Traditional row layout based keyboards}{chapter.2}% 9
-\BOOKMARK [1][-]{section.2.3}{Existing Study on Gesture Optimised Keyboards}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Existing Study on Gesture Optimized Keyboards}{chapter.2}% 10
 \BOOKMARK [2][-]{subsection.2.3.1}{Procedure}{section.2.3}% 11
 \BOOKMARK [2][-]{subsection.2.3.2}{Choosing the optimal layouts}{section.2.3}% 12
 \BOOKMARK [0][-]{chapter.3}{Layout Evaluation Metrics}{}% 13
@@ -15,8 +15,8 @@
 \BOOKMARK [1][-]{section.3.2}{Gesture Speed}{chapter.3}% 15
 \BOOKMARK [1][-]{section.3.3}{Qwerty Similarity}{chapter.3}% 16
 \BOOKMARK [0][-]{chapter.4}{Existing Implementation}{}% 17
-\BOOKMARK [1][-]{section.4.1}{Metric Normalisation}{chapter.4}% 18
-\BOOKMARK [1][-]{section.4.2}{Pareto Front Initialisation}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.1}{Metric Normalization}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.2}{Pareto Front Initialization}{chapter.4}% 19
 \BOOKMARK [1][-]{section.4.3}{Pareto Front Expansion}{chapter.4}% 20
 \BOOKMARK [1][-]{section.4.4}{Runtime}{chapter.4}% 21
 \BOOKMARK [0][-]{chapter.5}{Proposed Changes in Metrics and Implementation}{}% 22
@@ -26,9 +26,9 @@
 \BOOKMARK [2][-]{subsection.5.2.2}{Gesture Speed}{section.5.2}% 26
 \BOOKMARK [2][-]{subsection.5.2.3}{Qwerty Similarity}{section.5.2}% 27
 \BOOKMARK [1][-]{section.5.3}{Implementation changes}{chapter.5}% 28
-\BOOKMARK [0][-]{chapter.6}{Initialisation and Testing Procedure}{}% 29
+\BOOKMARK [0][-]{chapter.6}{Initialization and Testing Procedure}{}% 29
 \BOOKMARK [1][-]{section.6.1}{Corpus Processing}{chapter.6}% 30
-\BOOKMARK [1][-]{section.6.2}{Interface Quantisation}{chapter.6}% 31
+\BOOKMARK [1][-]{section.6.2}{Interface Quantization}{chapter.6}% 31
 \BOOKMARK [2][-]{subsection.6.2.1}{Gesture Trace Evaluation}{section.6.2}% 32
 \BOOKMARK [0][-]{chapter.7}{Observations}{}% 33
 \BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 34
