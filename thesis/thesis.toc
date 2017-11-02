@@ -31,5 +31,5 @@
 \contentsline {section}{\numberline {6.2}Interface Quantization}{19}{section.6.2}
 \contentsline {subsection}{\numberline {6.2.1}Gesture Trace Evaluation}{19}{subsection.6.2.1}
 \contentsline {chapter}{\numberline {7}Observations}{21}{chapter.7}
-\contentsline {chapter}{\numberline {8}Conclusion}{23}{chapter.8}
-\contentsline {chapter}{\numberline {9}Future Work}{24}{chapter.9}
+\contentsline {chapter}{\numberline {8}Conclusion}{24}{chapter.8}
+\contentsline {chapter}{\numberline {9}Future Work}{25}{chapter.9}

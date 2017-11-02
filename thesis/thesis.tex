@@ -74,7 +74,7 @@ Thanks to all my friends who participated in the brainstorming leading to this p
 % Abstract
 
 \abstract
-\noindent Usage of standard 3 row Qwerty keyboard for touchscreens is a standard adopted from physical keyboards. Gesture based typing has emerged as a new way of typing on touchscreen. However standard Qwerty suffers from gesture ambiguity which is a problem non-relevant to touch typing. We explore some ways to design and test new as well as existing keyboard layouts to optimize them for touchscreen usage. The keyboards are evaluated based on gesture speed and clarity while minimizing the ambiguity. We try to improve the process by improving the metrics used in the process so that they represent human interaction more accurately. We found that the improved metrics are more effective for longer words.
+\noindent Usage of standard 3-row Qwerty keyboard for touchscreens is a standard adopted from physical keyboards. Gesture based typing has emerged as a new way of typing on touchscreen. However standard Qwerty suffers from gesture ambiguity which is a problem non-relevant to touch typing. We explore some ways to design and test new as well as existing keyboard layouts to optimize them for touchscreen usage. The keyboards are evaluated based on gesture speed and clarity while minimizing the ambiguity. We try to improve the process by improving the metrics used in the process so that they represent human interaction more accurately. We found that the improved metrics are more effective for longer words.
 
 \pagebreak
 
@@ -135,9 +135,7 @@ Thanks to all my friends who participated in the brainstorming leading to this p
 \label{chap:intro}
 
 
-Gesture typing is a very popular form of input in smartphones today. Keyboards like Swype, SwiftKey, SlideIT, TouchPal, and Gboard are amongst the most popular ones which have gesture typing along with touch typing (tapping). Gestures let users develop muscle memory over time to create strokes for words they use most frequently. Usage of gestures eliminates the need to tap each letter. To accommodate words which cannot be recognized by the gestures, tapping is also available to facilitate traditional letter by letter input.
-
-
+Gesture typing is a very popular form of input in smartphones today. In modern touchscreen keyboards, it works by swiping a finger or stylus over the keyboard while tracing each letter in the word. Touchscreen Keyboards like Swype, SwiftKey, SlideIT, TouchPal, and Gboard are amongst the most popular ones which have gesture typing along with tapping individual keys. Gestures let users develop muscle memory over time to create strokes for words they use most frequently. Usage of gestures eliminates the need to tap each letter. To accommodate words which cannot be recognized by the gestures, tapping is also available to facilitate traditional letter by letter input.
 
 
 However, gesture typing suffers from ambiguous word gestures. The error rate for gesture typing is approximately 5-10\% [\cite{evaluation}] higher than for touch typing.  This problem occurs because when gesture typing, the input finger must inevitably cross unintended letters before reaching the intended one. The Qwerty layout amplifies this problem further because vowels such as u, i and o are arranged together on Qwerty, many pairs of words have
@@ -153,21 +151,18 @@ We must also take into consideration the speed of making gesture. A lengthy gest
 We try to balance the above trade-offs while reducing the gesture ambiguity in order to generate prototypes for gesture optimal keyboard layouts. As an initial step, we try to improve the metrics used by existing method to represent human gestures more accurately.
 
 \section{Contributions}
-We examined and identified the shortcomings of the existing method for keyboard layout evaluation.\\
-We proposed modifications to the layout evaluation metrics used in the existing method. We had two iterations of proposed modifications. We tested the results of proposed metric against existing metrics on randomly chosen samples and their ideal cases in both the iterations of proposals.\\ 
-The initial proposal gave overall satisfactory results but also gave worse results for some samples. The next proposal improvised on this method and used old metric as baseline fail-back metric in absence of any improvement.\\
-This modification ensures either improvement or status quo for each individual sample and overall improvement in the metrics. 
-
+We examined and identified the shortcomings of an existing method for keyboard layout evaluation which was published in CHI 2015 [\cite{gesturerecog}]\\
+We proposed modifications to the layout evaluation metrics used in the existing method. We had proposed two modifications. After testing the first modification, we proposed another modification and discarded the earlier modification. We tested the results of the proposed metrics against the existing metrics on randomly chosen samples and their ideal cases in both the iterations of proposals.\\ 
+The initial proposal used Bezier curves and ngrams. Our testing method compared new metric with old metric without using an ideal metric. After testing with this proposal, we found some flaws in our testing method and decided to revise the proposal. The next proposal uses old metric as baseline fail-back metric in absence of any improvement. This ensures that the proposed metrics will not be worse than existing one. Using this provision to our advantage, we revised the testing method to find the probability of improvement by testing how close the results of the new metrics are to the ideal metrics as compared to the old metrics.
 
 \section{Outline}
-The following chapters discuss in detail how we conducted this project.\\
-Chapter 2 talks about the history of touchscreen and non-touchscreen keyboards followed by details of an existing study optimal keyboard layouts for touchscreens and its results.\\
-Chapter 3 explains the metrics used to evaluate keyboard layouts and the rationale behind choosing each of them.\\
-Chapter 4 explains how the layout evaluation techniques are used to iteratively generate and test various keyboard layouts in order to score them on different metrics.\\
-Chapter 5 talks about our modifications to the keyboard layout structure, our changes in the metrics and in the implementation of the evaluation procedure.\\
-Chapter 6 explains the procedure for the experiments conducted to evaluate the performance of our proposed metrics.\\
-Chapter 7 details the observations of the experiments for a standard layout and also for a proposed non-standard layout.\\
-Chapter 8 concludes the findings of the project and provides an insight to possible future work.\\
+The following chapters are organized as follows: 
+Chapter 2 talks about the history of touchscreen and non-touchscreen keyboards followed by details of an existing study optimal keyboard layouts for touchscreens and its results. Chapter 3 explains the metrics used to evaluate keyboard layouts and the rationale behind choosing each of them.
+Chapter 4 explains how the layout evaluation techniques are used to iteratively generate and test various keyboard layouts in order to score them on different metrics.
+Chapter 5 talks about our modifications to the keyboard layout structure, our changes in the metrics and in the implementation of the evaluation procedure.
+Chapter 6 explains the procedure for the experiments conducted to evaluate the performance of our proposed metrics.
+Chapter 7 details the observations of the experiments for a standard layout and also for a proposed non-standard layout.
+Chapter 8 concludes the findings of the project and provides an insight to possible future work.
 
 \chapter{Background Study}
 Having precursor knowledge about the history behind the existing methodology always helps in understanding the thought process that went into it. We also get the ability to appreciate certain techniques and find possible flaws or scope of improvement in some other. It also ensures that we do not inadvertently miss important details. To accomplish this, we studied some literature which motivates the project.
@@ -187,12 +182,12 @@ Cirrin [\cite{cirrin}] and Quikwriting [\cite{quicwriting}] were originally deve
 
 
 \section{Traditional row layout based keyboards}
-Qwerty was originally developed to reduce jamming in typewriters by placing letters in most common bi-grams far away from each other. But this problem is non-relevant to computer keyboards. Due to the popularity of Qwerty among all the existing typists, computer keyboards were also manufactured in Qwerty layout. Inherently, they were not optimized for comfortable typing. There were many alternative layouts created such as Dvorák, Colemak, Workman, Maltron, TypeMatrix etc. Some of them even have one handed layouts. Some gesture based keyboards like Gboard, SwiftKey also provide Dvorák, Colemak as options for layout on touchscreen. 
+Qwerty was originally developed to reduce jamming in typewriters by placing letters in most common bi-grams far away from each other. But this problem is non-relevant to computer keyboards. Due to the popularity of Qwerty among all the existing typists, computer keyboards were also manufactured in Qwerty layout. Inherently, they were not optimized for comfortable typing. There were many alternative layouts created such as Dvorak, Colemak, Workman, Maltron, TypeMatrix etc. Some of them even have one handed layouts. Some gesture based keyboards like Gboard, SwiftKey also provide Dvorak, Colemak as options for layout on touchscreen. 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.35]{Images/dvorak}
-	\caption{Dvorák}
+	\caption{Dvorak}
 \end{figure}
 
 \begin{figure}[h!]
@@ -216,22 +211,22 @@ Qwerty was originally developed to reduce jamming in typewriters by placing lett
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.16]{Images/typematrix}
-	\caption{TypeMatrix in Dvorák version}
+	\caption{TypeMatrix in Dvorak version}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.35]{Images/dvorak_left_hand}
-	\caption{Left Handed Dvorák}
+	\caption{Left Handed Dvorak}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.35]{Images/dvorak_right_hand}
-	\caption{Right Handed Dvorák}
+	\caption{Right Handed Dvorak}
 \end{figure}
 
-However, it should be noted that although they are optimized for two handed typing using 8-10 fingers, they are not proven to be suitable for single finger gesture based typing. For example, Colemak is optimized mainly to retain AZXCV in their Qwerty positions to simplify clipboard operations. Dvorák is optimized to have all vowels on the left hand. These properties are undesirable in a gesture based keyboard. They exist primarily to help users use the same layout they use on their computers.
+However, it should be noted that although they are optimized for two handed typing using 8-10 fingers, they are not proven to be suitable for single finger gesture based typing. For example, Colemak is optimized mainly to retain AZXCV in their Qwerty positions to simplify clipboard operations. Dvorak is optimized to have all vowels on the left hand. These properties are undesirable in a gesture based keyboard. They exist primarily to help users use the same layout they use on their computers.
 
 
 One of the most important problems with the usage of row layout based keyboards is that they create many gestures which have straight horizontal lines which results in many ambiguous and duplicate gestures. Hence the most effective solution would be to test the effect of slightly modified or staggered versions of existing keyboard layouts on the clarity and speed of gesture typing and to use the results to incrementally test and revise better keyboard layouts until we achieve the target speed and clarity.
@@ -302,7 +297,7 @@ We compute the distance between two ideal traces w and x via proportional shape 
 \begin{equation}
 d(w,x) = \frac{1}{N} \sum_{i=1}^{N} \| w_{i} - x_{i} \|_{2}
 \end{equation}
-For example, the word "resistance" is the nearest neighbor of of the word "respective" and the distance between them is 9.11 units using this metric in Qwerty. 
+For example, in our tests, the word "resistance" is the nearest neighbor of of the word "respective" and the distance between them is 9.11 units using this metric in Qwerty. 
 
 \section{Gesture Speed}
 Gestures are split into curves, line segments and corners and CLC model [\cite{strokes}] is used as the basis for this metric which in turn is based on human motor control theory. According to the CLC model, people tend to make faster strokes on longer line segments. The entry time for a stroke depends on the angle at a corner. However, this entry time much smaller than the entry time for a line segment irrespective of curve. Hence it can be easily ignored. 
@@ -319,7 +314,7 @@ To calculate speed, we divide the number of milliseconds in a minute by the aver
 \begin{equation}
 Speed = \frac{60000}{G}
 \end{equation}
-For example, the speed for the word "respective" using this metric in Qwerty is 4966.
+For example, in our tests, the speed for the word "respective" using this metric in Qwerty is 4966.
 
 \section{Qwerty Similarity}
 The Qwerty similarity metric can be calculated using average of squared euclidean distances of keys from the the original Qwerty positions. However this metric is observed to punish farther placement of a small number of keys far more severely than a small displacement of multiple keys. Considering that keyboard is a grid, Manhattan distance was taken as a suitable metric to allow some infrequent keys to be moved more liberally without deeming the layout to be too dissimilar. To simplify Manhattan distance calculation, keys are aligned vertically by shifting middle row slightly to the left and bottom row to the right to align both of them to the top row.
@@ -403,7 +398,7 @@ For the the purpose of testing, we need a corpus which is composed of the letter
 \section{Corpus Processing}
 We use Brown corpus [\cite{brown}] as training data. It contains about 50,000 unique words.
 We generate ngrams using top 5000 most frequent words.
-Then we calculate Ngram frequencies to find the most common ngrams to be used for optimization For the purpose of testing, we use top 100 ngrams. This is because the frequencies of ngrams reduce significantly beyond top 100 words and hence using them will not contribute significant advantage over not using them.
+Then we calculate ngram frequencies to find the most common ngrams to be used for optimization For the purpose of testing, we use top 100 ngrams. This is because the frequencies of ngrams reduce significantly beyond top 100 words and hence using them will not contribute significant advantage over not using them.
 
 \section{Interface Quantization}
 We use standard Qwerty keyboard layout and calculate key positions.
@@ -415,7 +410,7 @@ We repeat this process for structural change in the keyboard. For modified iQwer
 
 \subsection{Gesture Trace Evaluation}
 We initially mapped traces of gestures using Bezier curves of order n where n is the word length. We also had evaluation method as whether this metric shows better result. We found that it was giving better results more than 90\% of the times up to 100\% for longer words but upon deeper investigation, we found two flaws in this method. One was that Bezier curve fails to represent longer words accurately. Another major flaw was that we did not use an ideal trace as a reference and only considered clearer and faster trace as an improvement. However, although more commonly true, it does not represent the real world scenario of human beings making the gestures. We found a better alternative to Bezier curve and chose b-splines. We also changed our testing methodology to check how many times the new trace is closer to ideal trace and not necessarily faster or clearer than old trace.
-In the new method, the word gesture traces are interpreted as b-Splines. Our search space is the entire set of words except the current word. To prune the search space, the starting letter of the first control point is considered as unchanged and all the other traces are ignored. This is likely to be true because generally users choose the first character more precisely than rest of the characters in the stroke. Gesture entry time is expected to be directly proportional to Qwerty similarity. However, this hypothesis has not been tested since we are testing the metrics per layout basis instead of testing the layout optimality.
+In the new method, the word gesture traces are interpreted as b-Splines. Our search space is the entire set of words except the current word. To prune the search space, the starting letter of the first control point is considered as unchanged and all the other traces are ignored. This is likely to be true because generally users choose the first character more precisely than rest of the characters in the stroke. Gesture entry time is expected to be directly proportional to Qwerty similarity. However, this assumption has not been tested since we are testing the metrics per layout basis instead of testing the layout optimality.
 
 \chapter{Observations}
 Distance between two b-splines is currently calculated using control points. Ideally we would need about 20 points to calculate distances with close to 90\% accuracy. To be able to propose new keyboard layout, we should consider 40 points in order to make more accurate predictions in approximately double the amount of time.
@@ -440,10 +435,10 @@ However, to prove the superiority of improved metrics over the older metrics, we
 The new metric is designed to fall back to old metric in case of non-availability of faster trace. Hence this metric guarantees that the new trace will not be worse. To measure the superiority, we calculate the percentage of times the metric gives results closer to ideal than old metric. In this case, we count the number of favorable cases from 100 samples each. Note that favorable cases or improvement in the metric refers to how close sampled cases are to their ideal metric counterpart and not necessarily faster or more accurate than older metric.
 
 
-Figure \ref{fig:results} shows the results for experiments on Qwerty and iQwerty. The x-axis shows word-lengths The blue line indicates the percentage of times the new metric shows improvement over old metric in clarity and orange line shows the same for speed. The green line indicates the time taken in seconds to get both the results.  We see in the figure that both speed and clarity improvements are more prominent for longer words. The experiment was repeated multiple times and similar pattern was observed in general. The consistent positive improvements show that the use of new metrics can give more accurate representation of human gestures. This can help in getting more accurate results while evaluating alternative keyboard layouts.
+Figure \ref{fig:results} shows the results for experiments on Qwerty and iQwerty. The x-axis shows word-lengths The blue line indicates the percentage of times the new metric shows improvement over old metric in clarity and orange line shows the same for speed. The green line indicates the time taken in seconds to get both the results which was usually around 10 seconds in our tests and did not have any specific relation to word length. This is due to the fact that every word trace is converted to 40 parts and hence the evaluation should take the same time for every trace.  We see in the figure that both speed and clarity improvements are more prominent for longer words. The experiment was repeated multiple times and similar pattern was observed in general. The consistent positive improvements show that the use of new metrics can give more accurate representation of human gestures. This can help in getting more accurate results while evaluating alternative keyboard layouts.
 
 \chapter{Conclusion}
-We studied the possible shortcomings of an existing methodology for keyboard layout evaluation and brainstormed over how they an be overcome. We started experimentation with original metrics and hypothesized the use of Ngram model instead of using only pairs of characters which is a bigram only model. We first experimented with ngrams of various lengths and found that their usage can represent human gestures more accurately if we use Bezier curves to represent the portions portions of the word which contain the n-grams. However, since it did not give correct results, we investigated further and found out that b-spline is a better alternative for longer words and hence we changed our procedure to use b-splines. We then used CLC model for speeds of words and proportional shape matching for clarity calculations using nearest neighbor of each word. We conducted both these experiments, clarity and speed calculation on two different layouts, 7 different word lengths, 100 random samples each. The results confirm the hypothesis and also show a pattern of better results for longer word lengths. Hence they also indicate that b-spline represents human gesture better than a Bezier curve or a polyline.
+We studied the possible shortcomings of an existing methodology for keyboard layout evaluation and brainstormed over how they an be overcome. We started experimentation with original metrics and proposed the use of ngram model instead of using only pairs of characters which is a bigram only model. We first experimented with ngrams of various lengths and found that their usage can represent human gestures more accurately if we use Bezier curves to represent the portions of the word which contain the ngrams. However, since it did not give correct results, we investigated further and found out that b-spline is a better alternative for longer words and hence we changed our procedure to use b-splines. We then used CLC model for speeds of words and proportional shape matching for clarity calculations using nearest neighbor of each word. We conducted both these experiments, clarity and speed calculation on two different layouts, 7 different word lengths, 100 random samples each. The results confirm that our proposal shows significant improvement due to the use of ngram model. The results also show a pattern of better results for longer word lengths. Hence they also indicate that b-spline represents human gesture better than a Bezier curve or a polyline.
 
 \chapter{Future Work}
 We have found that the proposed methodology gives better metrics than the earlier methodology. The results achieved so far can be used to propose new keyboard layouts and can have further refinements in stroke sampling and processing. The results can also be tested on users to check whether they follow the experimental assumptions about speed, clarity and familiarity. Pareto front calculation and expansion using new metrics will give more realistic results since the measured difference between ideal and improved metrics is smaller than that with old metrics. More refinements are possible with further understanding of advancements in human motor control.
