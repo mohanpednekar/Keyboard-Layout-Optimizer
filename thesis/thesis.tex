@@ -17,11 +17,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page
 
-\title{GESTURE OPTIMIZED KEYBOARD LAYOUTS}
+\title{NGRAM BASED METRICS FOR EVALUATION OF GESTURE BASED KEYBOARD LAYOUTS}
 
 \author{Mohan Namdeo Pednekar}
 
-\date{Oct 2017}
+\date{Nov 2017}
 \department{COMPUTER SCIENCE AND ENGINEERING}
 
 %\nocite{*}
@@ -32,7 +32,7 @@
 
 \vspace*{0.5in}
 
-\noindent This is to certify that the thesis titled {\bf GESTURE OPTIMIZED KEYBOARD LAYOUTS}, submitted by {\bf Mohan Namdeo Pednekar}, 
+\noindent This is to certify that the thesis titled {\bf NGRAM BASED METRICS FOR EVALUATION OF GESTURE BASED KEYBOARD LAYOUTS}, submitted by {\bf Mohan Namdeo Pednekar}, 
   to the Indian Institute of Technology, Madras, for
 the award of the degree of {\bf Master of Technology}, is a bona fide
 record of the research work done by him under our supervision.  The
@@ -156,7 +156,7 @@ We proposed modifications to the layout evaluation metrics used in the existing 
 The initial proposal used Bezier curves and ngrams. Our testing method compared new metric with old metric without using an ideal metric. After testing with this proposal, we found some flaws in our testing method and decided to revise the proposal. The next proposal uses old metric as baseline fail-back metric in absence of any improvement. This ensures that the proposed metrics will not be worse than existing one. Using this provision to our advantage, we revised the testing method to find the probability of improvement by testing how close the results of the new metrics are to the ideal metrics as compared to the old metrics.
 
 \section{Outline}
-The following chapters are organized as follows: 
+The thesis is organized as follows:\\
 Chapter 2 talks about the history of touchscreen and non-touchscreen keyboards followed by details of an existing study optimal keyboard layouts for touchscreens and its results. Chapter 3 explains the metrics used to evaluate keyboard layouts and the rationale behind choosing each of them.
 Chapter 4 explains how the layout evaluation techniques are used to iteratively generate and test various keyboard layouts in order to score them on different metrics.
 Chapter 5 talks about our modifications to the keyboard layout structure, our changes in the metrics and in the implementation of the evaluation procedure.
@@ -421,7 +421,7 @@ Distance between two b-splines is currently calculated using control points. Ide
 	\caption{Accuracy v/s Sample points }
 \end{figure}
 
-However, to prove the superiority of improved metrics over the older metrics, we performed distance and speed calculations for randomly chosen 100 words at a time with their own ideal traces. 100 words each were chosen from 4 to 10 letter words. Here, ideal trace is the b-spline of the order $2*n-1$ with $n-1$ additional points as midpoints of each bigram. Older metric uses straight lines connecting consecutive letters. Hence it creates a polyline with n points for a word of length n. The polyline goes trough each character. New metric replaces common trigrams or quadgrams with b-splines. In case of trigram, we remove a pair of straight lines which represent that trigram and form a b-spline of the order 5 with 2 additional points as midpoints of each bigram in the trigram. In case of quadgram, we remove 3 straight lines that represent the quadgram and form o b-spline of order 7 with 3 additional points as midpoints of each bigram in the quadgram. 
+However, to prove the superiority of improved metrics over the older metrics, we performed distance and speed calculations for randomly chosen 100 words at a time with their own ideal traces. 100 words each were chosen from 4 to 10 letter words. Here, ideal trace is the b-spline of the order $2*n-1$ with $n-1$ additional points as midpoints of each bigram. Older metric uses straight lines connecting consecutive letters. Hence it creates a polyline with n points for a word of length n. The polyline goes through each character. New metric replaces common trigrams or quadgrams with b-splines. In case of trigram, we remove a pair of straight lines which represent that trigram and form a b-spline of the order 5 with 2 additional points as midpoints of each bigram in the trigram. In case of quadgram, we remove 3 straight lines that represent the quadgram and form o b-spline of order 7 with 3 additional points as midpoints of each bigram in the quadgram. 
 
 
 \begin{figure}[h!] 
@@ -438,7 +438,8 @@ The new metric is designed to fall back to old metric in case of non-availabilit
 Figure \ref{fig:results} shows the results for experiments on Qwerty and iQwerty. The x-axis shows word-lengths The blue line indicates the percentage of times the new metric shows improvement over old metric in clarity and orange line shows the same for speed. The green line indicates the time taken in seconds to get both the results which was usually around 10 seconds in our tests and did not have any specific relation to word length. This is due to the fact that every word trace is converted to 40 parts and hence the evaluation should take the same time for every trace.  We see in the figure that both speed and clarity improvements are more prominent for longer words. The experiment was repeated multiple times and similar pattern was observed in general. The consistent positive improvements show that the use of new metrics can give more accurate representation of human gestures. This can help in getting more accurate results while evaluating alternative keyboard layouts.
 
 \chapter{Conclusion}
-We studied the possible shortcomings of an existing methodology for keyboard layout evaluation and brainstormed over how they an be overcome. We started experimentation with original metrics and proposed the use of ngram model instead of using only pairs of characters which is a bigram only model. We first experimented with ngrams of various lengths and found that their usage can represent human gestures more accurately if we use Bezier curves to represent the portions of the word which contain the ngrams. However, since it did not give correct results, we investigated further and found out that b-spline is a better alternative for longer words and hence we changed our procedure to use b-splines. We then used CLC model for speeds of words and proportional shape matching for clarity calculations using nearest neighbor of each word. We conducted both these experiments, clarity and speed calculation on two different layouts, 7 different word lengths, 100 random samples each. The results confirm that our proposal shows significant improvement due to the use of ngram model. The results also show a pattern of better results for longer word lengths. Hence they also indicate that b-spline represents human gesture better than a Bezier curve or a polyline.
+We studied the possible shortcomings of an existing methodology for keyboard layout evaluation and brainstormed over how they an be overcome. We started experimentation with original metrics and proposed the use of ngram model instead of using only pairs of characters which is a bigram only model. We first experimented with ngrams of lengths 4 to 10 and found that their usage can represent human gestures more accurately more than 90\% of the times if we use Bezier curves to represent the portions of the word which contain the ngrams. We investigated further and found out that b-spline is a better alternative for longer words and hence we changed our procedure to use b-splines. We then used CLC model for speeds of words and proportional shape matching for clarity calculations using nearest neighbor of each word. We conducted both these experiments, clarity and speed calculation on two different layouts, 7 different word lengths, 100 random samples each.\\
+The results confirm that our proposal shows improvement ranging from 20\% to 90\% due to the use of ngram model with results getting better for longer word lengths. Hence they also indicate that b-spline represents human gesture better than a Bezier curve or a polyline. We also showed that our metric design is also compatible with structural changes in Keyboard by running all the tests on iQwerty keyboard successfully.
 
 \chapter{Future Work}
 We have found that the proposed methodology gives better metrics than the earlier methodology. The results achieved so far can be used to propose new keyboard layouts and can have further refinements in stroke sampling and processing. The results can also be tested on users to check whether they follow the experimental assumptions about speed, clarity and familiarity. Pareto front calculation and expansion using new metrics will give more realistic results since the measured difference between ideal and improved metrics is smaller than that with old metrics. More refinements are possible with further understanding of advancements in human motor control.
